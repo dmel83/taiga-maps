@@ -1,0 +1,350 @@
+# Сборка векторных карт для приложения ТАЙГА.
+#
+# ЗАЧЕМ ЭТО ЗДЕСЬ. Карта одной области — это двести мегабайт и часы
+# счёта. Собирать её на домашнем компьютере и потом куда-то везти —
+# самая дорогая часть работы: файл такого размера не проходит ни через
+# один канал, которым мы пользуемся. Здесь он никуда и не едет: сборка
+# идёт на серверах GitHub, ровно там же, где потом лежит релиз.
+#
+# КАК ЗАПУСТИТЬ. Вкладка Actions → «Собрать карты ТАЙГА» → Run workflow →
+# в поле вписать одно из:
+#   KARELIA              — одна область (ключи смотри в regions.json);
+#   KARELIA,PSKOV,TVER   — несколько через запятую;
+#   РЯДОМ                — группа: ближайшие к Ленобласти области;
+#   СЕВЕРО-ЗАПАД, ЦЕНТР, ПОВОЛЖЬЕ, ЮГ, КАВКАЗ, УРАЛ, СИБИРЬ,
+#   ДАЛЬНИЙ-ВОСТОК      — федеральный округ целиком;
+#   ВСЯ-РОССИЯ           — все 82 карты (сутки-двое работы).
+#
+# Готовые карты складываются в релиз maps-2026-08, а список maps.json
+# переписывается по тому, что реально лежит в релизе. Приложение читает
+# этот список само — обновлять его руками не нужно.
+#
+# ПОЧЕМУ РАБОТА РАЗБИТА НА ТРИ ЧАСТИ. Geofabrik отдаёт данные не по
+# областям, а по федеральным округам: один файл на 600–800 мегабайт.
+# Качать его заново для каждой из четырнадцати областей округа — это
+# десять гигабайт трафика с чужого бесплатного сервера за один запуск.
+# Поэтому сначала один раз качается округ (задача «Скачать округ»),
+# потом области режутся и собираются каждая своей задачей, параллельно
+# по шесть штук.
+#
+# Actions на публичных репозиториях бесплатны; предел — шесть часов на
+# одну задачу. Ленинградская область считается около трёх.
+
+name: Собрать карты ТАЙГА
+
+on:
+  workflow_dispatch:
+    inputs:
+      what:
+        description: "Ключ области, несколько через запятую или название группы (РЯДОМ, СЕВЕРО-ЗАПАД, ВСЯ-РОССИЯ)"
+        required: true
+        default: "РЯДОМ"
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  RELEASE_TAG: maps-2026-08
+
+jobs:
+
+  plan:
+    name: Разобрать заказ
+    runs-on: ubuntu-latest
+    outputs:
+      regions: ${{ steps.plan.outputs.regions }}
+      sources: ${{ steps.plan.outputs.sources }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Составить список областей
+        id: plan
+        env:
+          WHAT: ${{ inputs.what }}
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os
+          data = json.load(open("regions.json"))
+          known = {r["key"]: r for r in data["regions"]}
+          groups = data["groups"]
+          asked = [w.strip() for w in os.environ["WHAT"].split(",") if w.strip()]
+          keys = []
+          for word in asked:
+              if word in groups:
+                  keys += groups[word]
+              elif word in known:
+                  keys.append(word)
+              else:
+                  raise SystemExit(
+                      "не знаю, что такое «%s»; есть группы: %s; ключи областей смотри в regions.json"
+                      % (word, ", ".join(groups)))
+          # Порядок сохраняем, повторы убираем: «РЯДОМ,KARELIA» не должно
+          # запускать Карелию дважды — вторая задача сломается о первую
+          # при выкладывании в релиз.
+          seen, ordered = set(), []
+          for k in keys:
+              if k not in seen:
+                  seen.add(k)
+                  ordered.append(k)
+          sources = []
+          for k in ordered:
+              s = known[k]["source"]
+              if s not in sources:
+                  sources.append(s)
+          print("regions=" + json.dumps(ordered))
+          print("sources=" + json.dumps(sources))
+          PY
+
+      - name: Показать, что будет собрано
+        run: |
+          echo "области: ${{ steps.plan.outputs.regions }}"
+          echo "исходные файлы: ${{ steps.plan.outputs.sources }}"
+
+      - name: Завести релиз, если его ещё нет
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Релиз заводится здесь, в одиночку. Если бы его создавала
+          # каждая задача сборки, шесть задач сделали бы это разом и
+          # пять из них упали бы с ошибкой «релиз уже есть».
+          gh release view "$RELEASE_TAG" >/dev/null 2>&1 || \
+            gh release create "$RELEASE_TAG" --title "Карты ТАЙГА" \
+              --notes "Векторные карты для приложения ТАЙГА. Данные © участники OpenStreetMap, ODbL 1.0."
+
+  fetch:
+    name: Скачать округ
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        source: ${{ fromJSON(needs.plan.outputs.sources) }}
+    steps:
+      - name: Скачать исходные данные
+        run: |
+          # Источник — любой путь на Geofabrik: округ России, страна,
+          # континент. Отсюда и получается «любая часть мира»: для
+          # Вьетнама это asia/vietnam, для Австралии australia-oceania.
+          curl -sSL --retry 3 --retry-delay 15 -o source.osm.pbf \
+            "https://download.geofabrik.de/${{ matrix.source }}-latest.osm.pbf"
+          ls -l source.osm.pbf
+          # Битую закачку видно сразу: файл начинается с длины заголовка
+          # и слова OSMHeader. Без этой проверки osmium упадёт через час.
+          head -c 20 source.osm.pbf | grep -qa OSMHeader
+
+      - name: Назвать посылку
+        id: name
+        run: echo "slug=$(echo '${{ matrix.source }}' | tr '/' '-')" >> "$GITHUB_OUTPUT"
+
+      - name: Передать данные задачам сборки
+        uses: actions/upload-artifact@v4
+        with:
+          name: src-${{ steps.name.outputs.slug }}
+          path: source.osm.pbf
+          retention-days: 1
+          compression-level: 0
+
+  build:
+    name: Собрать
+    needs: [plan, fetch]
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        region: ${{ fromJSON(needs.plan.outputs.regions) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Прочитать область из списка
+        id: region
+        env:
+          REGION: ${{ matrix.region }}
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os
+          key = os.environ["REGION"].strip()
+          data = json.load(open("regions.json"))
+          one = next(r for r in data["regions"] if r["key"] == key)
+          print("title=" + one["title"])
+          print("slug=" + one["source"].replace("/", "-"))
+          box = one.get("bbox", "").strip()
+          print("bbox=" + box)
+          PY
+
+      - name: Освободить место на диске
+        run: |
+          # На раннере занято чужим добром больше двадцати гигабайт:
+          # компиляторы .NET, Android SDK, образы Docker. Нам нужен
+          # исходный файл округа, вырезанная область и временные файлы
+          # сборки — без уборки места не хватит на большие округа.
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc \
+                      /usr/local/share/boost "$AGENT_TOOLSDIRECTORY" || true
+          docker image prune -af || true
+          df -h / | tail -1
+
+      - name: Поставить инструменты
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq osmium-tool openjdk-17-jre-headless
+          # Osmosis с подключаемым модулем записи карт: именно он умеет
+          # укладывать данные в формат, который читает приложение.
+          curl -sSL --retry 3 -o /tmp/osmosis.tar \
+            https://github.com/openstreetmap/osmosis/releases/download/0.49.2/osmosis-0.49.2.tar
+          mkdir -p /tmp/osmosis && tar -xf /tmp/osmosis.tar -C /tmp/osmosis
+          mkdir -p "$HOME/.openstreetmap/osmosis/plugins"
+          curl -sSL --retry 3 -o "$HOME/.openstreetmap/osmosis/plugins/mapsforge-map-writer.jar" \
+            https://repo1.maven.org/maven2/org/mapsforge/mapsforge-map-writer/0.25.0/mapsforge-map-writer-0.25.0-jar-with-dependencies.jar
+          chmod +x /tmp/osmosis/bin/osmosis
+
+      - name: Взять данные округа
+        uses: actions/download-artifact@v4
+        with:
+          name: src-${{ steps.region.outputs.slug }}
+
+      - name: Вырезать область
+        env:
+          BBOX: ${{ steps.region.outputs.bbox }}
+        run: |
+          BOX="$BBOX"
+          if [ -z "$BOX" ]; then
+            # Страна целиком: вырезать нечего, источник и есть область.
+            mv source.osm.pbf region.osm.pbf
+          else
+            # Порядок чисел у osmium — запад,юг,восток,север; у osmosis
+            # ниже другой: юг,запад,север,восток. Перепутанные местами
+            # числа дают пустую карту без единой ошибки в логе.
+            # Способ smart тянет за собой целые дороги и целые контуры
+            # озёр и лесов, выходящие за рамку: иначе по краю области
+            # река обрывалась бы на полуслове.
+            # Рамка передаётся через знак равенства: у Чукотки запад
+            # рамки отрицательный, и osmium принял бы «-180» за ключ.
+            osmium extract -s smart --bbox="$BOX" \
+              source.osm.pbf -o region.osm.pbf --overwrite
+            rm -f source.osm.pbf
+          fi
+          ls -l region.osm.pbf
+          df -h / | tail -1
+
+      - name: Собрать карту
+        env:
+          BBOX: ${{ steps.region.outputs.bbox }}
+        run: |
+          # Рамка для записи карты переставляется местами: у osmium
+          # порядок запад,юг,восток,север, а здесь — юг,запад,север,восток.
+          # Перепутанные числа дают карту, пустую на весь экран.
+          MW_BBOX=""
+          if [ -n "$BBOX" ]; then
+            W=$(echo "$BBOX" | cut -d, -f1)
+            S=$(echo "$BBOX" | cut -d, -f2)
+            E=$(echo "$BBOX" | cut -d, -f3)
+            N=$(echo "$BBOX" | cut -d, -f4)
+            MW_BBOX="bbox=$S,$W,$N,$E"
+          fi
+          # Память задана явно: при нехватке osmosis не падает сразу,
+          # а тихо умирает через час работы. На раннере шестнадцать
+          # гигабайт, одиннадцать отдаём Java, остальное — системе и
+          # временным файлам способа hd.
+          #
+          # ПРИСТАВКА В ИМЕНИ ПО ПРОСЬБЕ: файл называется TAIGA-<КЛЮЧ>.map,
+          # чтобы на телефоне и в релизе было видно, чей это файл.
+          JAVACMD_OPTIONS=-Xmx11G /tmp/osmosis/bin/osmosis \
+            --rb file=region.osm.pbf \
+            --mapfile-writer file=TAIGA-${{ matrix.region }}.map \
+              type=hd threads=4 $MW_BBOX \
+              tag-conf-file=tools-tag-mapping-taiga.xml
+          ls -l TAIGA-${{ matrix.region }}.map
+
+      - name: Проверить, что карта не пустая
+        run: |
+          # Меньше мегабайта на целую область — значит вырезали не то
+          # или перепутали порядок чисел в рамке. Лучше остановиться
+          # здесь, чем выложить в релиз пустышку и узнать об этом в лесу.
+          size=$(stat -c%s "TAIGA-${{ matrix.region }}.map")
+          echo "размер карты: $size байт"
+          test "$size" -gt 1000000
+          head -c 20 "TAIGA-${{ matrix.region }}.map" | grep -qa "mapsforge binary OSM"
+
+      - name: Положить карту в релиз
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "$RELEASE_TAG" "TAIGA-${{ matrix.region }}.map" --clobber
+
+  list:
+    name: Обновить список карт
+    needs: [plan, build]
+    # Список обновляем, даже если часть областей не собралась: те, что
+    # собрались, должны появиться в приложении сегодня, а не после
+    # починки соседней области.
+    if: ${{ !cancelled() && needs.plan.result == 'success' }}
+    runs-on: ubuntu-latest
+    # Два запуска сборки, идущие внахлёст, не должны переписывать
+    # список одновременно: второй подождёт первого.
+    concurrency:
+      group: taiga-maps-list
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Переписать maps.json по содержимому релиза
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Список собирается не из того, что мы собирались собрать, а из
+          # того, что действительно лежит в релизе. Упавшая задача сборки
+          # не оставит в списке строку, ведущую в никуда, а приложение не
+          # покажет карту, которой нет.
+          gh release view "$RELEASE_TAG" --json assets > assets.json
+          python3 - <<'PY'
+          import json, os, datetime
+          assets = json.load(open("assets.json"))["assets"]
+          titles = {r["key"]: r["title"] for r in json.load(open("regions.json"))["regions"]}
+          was = {m["file"]: m for m in json.load(open("maps.json"))["maps"]}
+          repo = os.environ["GITHUB_REPOSITORY"]
+          tag = os.environ["RELEASE_TAG"]
+          maps = []
+          for a in assets:
+              name = a["name"]
+              if not name.endswith(".map"):
+                  continue
+              key = name[len("TAIGA-"):-len(".map")] if name.startswith("TAIGA-") \
+                    else name[:-len(".map")]
+              title = titles.get(key) or was.get(name, {}).get("title") or key
+              maps.append({
+                  "title": title,
+                  "file": name,
+                  "url": "https://github.com/%s/releases/download/%s/%s" % (repo, tag, name),
+                  "bytes": a["size"],
+                  "updated": (a.get("updatedAt") or a.get("createdAt") or "")[:10]
+                             or datetime.date.today().isoformat(),
+              })
+          # Старое имя без приставки TAIGA остаётся в релизе, пока не
+          # собрана замена. Как только замена появилась — старое из
+          # списка убираем, иначе в приложении будет две одинаковые
+          # строки, ведущие на разные файлы.
+          new_titles = {m["title"] for m in maps if m["file"].startswith("TAIGA-")}
+          maps = [m for m in maps
+                  if m["file"].startswith("TAIGA-") or m["title"] not in new_titles]
+          # Порядок в списке — порядок на экране приложения; держим по
+          # алфавиту, чтобы новая область не оказывалась в конце.
+          maps.sort(key=lambda m: m["title"])
+          json.dump({"version": 1, "maps": maps}, open("maps.json", "w"),
+                    ensure_ascii=False, indent=2)
+          open("maps.json", "a").write("\n")
+          print("карт в списке:", len(maps))
+          PY
+
+      - name: Записать список в репозиторий
+        run: |
+          git config user.name "taiga-maps"
+          git config user.email "taiga-maps@users.noreply.github.com"
+          git add maps.json
+          git pull --rebase --autostash
+          git add maps.json
+          git commit -m "Список карт: $(python3 -c 'import json;print(len(json.load(open("maps.json"))["maps"]))') шт." \
+            || { echo "список не изменился"; exit 0; }
+          git push
