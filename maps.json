@@ -2,11 +2,53 @@
   "version": 1,
   "maps": [
     {
+      "title": "Вологодская область",
+      "file": "TAIGA-VOLOGDA.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-VOLOGDA.map",
+      "bytes": 87609694,
+      "updated": "2026-08-18"
+    },
+    {
+      "title": "Карелия",
+      "file": "TAIGA-KARELIA.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KARELIA.map",
+      "bytes": 189844943,
+      "updated": "2026-08-18"
+    },
+    {
       "title": "Ленинградская область",
-      "file": "LENOBL.map",
-      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/LENOBL.map",
-      "bytes": 183983843,
-      "updated": "2026-08-16"
+      "file": "TAIGA-LENOBL.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-LENOBL.map",
+      "bytes": 197279140,
+      "updated": "2026-08-18"
+    },
+    {
+      "title": "Мурманская область",
+      "file": "TAIGA-MURMANSK.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-MURMANSK.map",
+      "bytes": 82920417,
+      "updated": "2026-08-18"
+    },
+    {
+      "title": "Новгородская область",
+      "file": "TAIGA-NOVGOROD.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-NOVGOROD.map",
+      "bytes": 51286221,
+      "updated": "2026-08-18"
+    },
+    {
+      "title": "Псковская область",
+      "file": "TAIGA-PSKOV.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-PSKOV.map",
+      "bytes": 77282254,
+      "updated": "2026-08-18"
+    },
+    {
+      "title": "Тверская область",
+      "file": "TAIGA-TVER.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-TVER.map",
+      "bytes": 211347544,
+      "updated": "2026-08-18"
     }
   ]
 }
