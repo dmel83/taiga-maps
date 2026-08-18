@@ -2,7 +2,7 @@
   "version": 1,
   "maps": [
     {
-      "title": "Архангельская область",
+      "title": "Архангельская область (материк)",
       "file": "TAIGA-ARKHANGELSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ARKHANGELSK.map",
       "bytes": 137094198,
@@ -30,7 +30,7 @@
       "updated": "2026-08-18"
     },
     {
-      "title": "Ленинградская область",
+      "title": "Ленинградская область и Санкт-Петербург",
       "file": "TAIGA-LENOBL.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-LENOBL.map",
       "bytes": 197279140,
