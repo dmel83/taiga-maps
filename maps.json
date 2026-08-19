@@ -100,6 +100,20 @@
       "updated": "2026-08-18"
     },
     {
+      "title": "Марий Эл",
+      "file": "TAIGA-MARIY_EL.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-MARIY_EL.map",
+      "bytes": 66264142,
+      "updated": "2026-08-19"
+    },
+    {
+      "title": "Мордовия",
+      "file": "TAIGA-MORDOVIA.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-MORDOVIA.map",
+      "bytes": 45329829,
+      "updated": "2026-08-19"
+    },
+    {
       "title": "Московская область и Москва",
       "file": "TAIGA-MOSOBL.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-MOSOBL.map",
@@ -156,6 +170,20 @@
       "updated": "2026-08-18"
     },
     {
+      "title": "Самарская область",
+      "file": "TAIGA-SAMARA.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-SAMARA.map",
+      "bytes": 87599464,
+      "updated": "2026-08-19"
+    },
+    {
+      "title": "Саратовская область",
+      "file": "TAIGA-SARATOV.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-SARATOV.map",
+      "bytes": 58258656,
+      "updated": "2026-08-19"
+    },
+    {
       "title": "Смоленская область",
       "file": "TAIGA-SMOLENSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-SMOLENSK.map",
@@ -170,11 +198,46 @@
       "updated": "2026-08-18"
     },
     {
+      "title": "Татарстан",
+      "file": "TAIGA-TATARSTAN.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-TATARSTAN.map",
+      "bytes": 169393494,
+      "updated": "2026-08-19"
+    },
+    {
       "title": "Тверская область",
       "file": "TAIGA-TVER.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-TVER.map",
       "bytes": 211347544,
       "updated": "2026-08-18"
+    },
+    {
+      "title": "Тульская область",
+      "file": "TAIGA-TULA.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-TULA.map",
+      "bytes": 57474813,
+      "updated": "2026-08-19"
+    },
+    {
+      "title": "Удмуртия",
+      "file": "TAIGA-UDMURTIA.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-UDMURTIA.map",
+      "bytes": 72092611,
+      "updated": "2026-08-19"
+    },
+    {
+      "title": "Ульяновская область",
+      "file": "TAIGA-ULYANOVSK.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ULYANOVSK.map",
+      "bytes": 78960233,
+      "updated": "2026-08-19"
+    },
+    {
+      "title": "Чувашия",
+      "file": "TAIGA-CHUVASHIA.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-CHUVASHIA.map",
+      "bytes": 38144337,
+      "updated": "2026-08-19"
     },
     {
       "title": "Ярославская область",
