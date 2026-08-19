@@ -72,6 +72,13 @@
       "updated": "2026-08-18"
     },
     {
+      "title": "Дагестан",
+      "file": "TAIGA-DAGESTAN.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-DAGESTAN.map",
+      "bytes": 52048265,
+      "updated": "2026-08-19"
+    },
+    {
       "title": "Ивановская область",
       "file": "TAIGA-IVANOVO.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-IVANOVO.map",
@@ -287,6 +294,13 @@
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-SMOLENSK.map",
       "bytes": 63110605,
       "updated": "2026-08-18"
+    },
+    {
+      "title": "Ставропольский край",
+      "file": "TAIGA-STAVROPOL.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-STAVROPOL.map",
+      "bytes": 57236771,
+      "updated": "2026-08-19"
     },
     {
       "title": "Тамбовская область",
