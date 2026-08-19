@@ -127,7 +127,12 @@ jobs:
           # Источник — любой путь на Geofabrik: округ России, страна,
           # континент. Отсюда и получается «любая часть мира»: для
           # Вьетнама это asia/vietnam, для Австралии australia-oceania.
-          curl -sSL --retry 3 --retry-delay 15 -o source.osm.pbf \
+          # Пределы по времени — по той же причине, что и у инструментов:
+          # молча зависшая закачка съедала бы час, отведённый задаче.
+          curl -sSL --retry 3 --retry-delay 15 \
+               --connect-timeout 30 --max-time 3000 \
+               --speed-time 120 --speed-limit 10240 \
+               -o source.osm.pbf \
             "https://download.geofabrik.de/${{ matrix.source }}-latest.osm.pbf"
           ls -l source.osm.pbf
           # Битую закачку видно сразу: файл начинается с длины заголовка
@@ -187,9 +192,44 @@ jobs:
           df -h / | tail -1
 
       - name: Поставить инструменты
+        # ИСПРАВЛЕНО ПОСЛЕ ПОВОЛЖЬЯ. Шесть областей — Башкортостан,
+        # Кировская, Нижегородская, Оренбургская, Пензенская и Пермский
+        # край — не собрались вовсе. В журнале каждой из них одна строка,
+        # «Run sudo apt-get update -qq», и через шесть часов приговор,
+        # дословно: «The job has exceeded the maximum execution time of
+        # 5h50m0s», «The operation was canceled». Карты никто не считал:
+        # задача всё это время стояла на установке инструментов.
+        #
+        # РАЗБИРАЕМЫЙ ДЕФЕКТ. Ни у apt, ни у curl не было предела по
+        # времени. Зависшее соединение или занятый замок apt — на раннере
+        # в фоне работает автообновление системы — останавливают задачу
+        # навсегда: она не падает, а молча ждёт, пока GitHub не убьёт её
+        # по общему пределу. Шесть часов бесплатного времени уходят в
+        # пустоту, и ошибки в журнале при этом нет, поэтому и починить
+        # было нечего.
+        #
+        # Лечится не увеличением предела, а тем, что у каждой операции
+        # появляется свой срок и повтор: зависание теперь стоит минуты,
+        # а не шести часов, и в журнале видно, что именно зависло.
+        timeout-minutes: 25
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq osmium-tool openjdk-17-jre-headless unzip
+          export DEBIAN_FRONTEND=noninteractive
+
+          # Замок apt ждём не дольше двух минут, всю команду — не дольше
+          # пяти, и до трёх попыток.
+          apt_do() {                  # что делать: update | install ...
+            for try in 1 2 3; do
+              if sudo timeout 300 apt-get -o DPkg::Lock::Timeout=120 "$@"; then
+                return 0
+              fi
+              echo "попытка $try: apt-get $* не уложился в пять минут, повторяю"
+              sleep 15
+            done
+            echo "apt-get $* не отработал за три попытки"
+            exit 1
+          }
+          apt_do update -qq
+          apt_do install -y -qq osmium-tool openjdk-17-jre-headless unzip
 
           # ИСПРАВЛЕНО ПОСЛЕ СБОРКИ ЦЕНТРАЛЬНОГО ОКРУГА. Из семнадцати
           # областей одна, Тульская, упала: «JPF Plugin
@@ -206,7 +246,14 @@ jobs:
           # открываться как архив. Битый — качаем заново, до трёх раз.
           fetch_archive() {           # адрес, куда, чем проверять
             for try in 1 2 3; do
-              curl -sSL --retry 3 --retry-delay 5 -o "$2" "$1" || true
+              # --max-time не даёт закачке идти дольше пятнадцати минут,
+              # --speed-time со --speed-limit обрывают её, если сервер
+              # больше минуты отдаёт меньше десяти килобайт в секунду:
+              # именно так выглядит зависание, а не обрыв.
+              curl -sSL --retry 3 --retry-delay 5 \
+                   --connect-timeout 30 --max-time 900 \
+                   --speed-time 60 --speed-limit 10240 \
+                   -o "$2" "$1" || true
               if [ "$3" = "zip" ]; then
                 unzip -tq "$2" >/dev/null 2>&1 && return 0
               else
@@ -237,6 +284,7 @@ jobs:
           chmod +x /tmp/osmosis/bin/osmosis
 
       - name: Взять данные округа
+        timeout-minutes: 40
         uses: actions/download-artifact@v4
         with:
           name: src-${{ steps.region.outputs.slug }}
@@ -305,6 +353,7 @@ jobs:
           head -c 20 "TAIGA-${{ matrix.region }}.map" | grep -qa "mapsforge binary OSM"
 
       - name: Положить карту в релиз
+        timeout-minutes: 40
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
