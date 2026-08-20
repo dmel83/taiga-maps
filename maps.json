@@ -205,6 +205,20 @@
       "updated": "2026-08-19"
     },
     {
+      "title": "Красноярский край (север)",
+      "file": "TAIGA-KRASNOYARSK_NORTH.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KRASNOYARSK_NORTH.map",
+      "bytes": 135297846,
+      "updated": "2026-08-20"
+    },
+    {
+      "title": "Красноярский край (юг)",
+      "file": "TAIGA-KRASNOYARSK_SOUTH.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KRASNOYARSK_SOUTH.map",
+      "bytes": 425738704,
+      "updated": "2026-08-20"
+    },
+    {
       "title": "Курганская область",
       "file": "TAIGA-KURGAN.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KURGAN.map",
