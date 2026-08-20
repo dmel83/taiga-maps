@@ -93,6 +93,13 @@
       "updated": "2026-08-19"
     },
     {
+      "title": "Донецкая Народная Республика",
+      "file": "TAIGA-DONETSK.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-DONETSK.map",
+      "bytes": 82417251,
+      "updated": "2026-08-20"
+    },
+    {
       "title": "Еврейская автономная область",
       "file": "TAIGA-JEWISH_AO.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-JEWISH_AO.map",
@@ -104,6 +111,13 @@
       "file": "TAIGA-ZABAIKALYE.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ZABAIKALYE.map",
       "bytes": 52039157,
+      "updated": "2026-08-20"
+    },
+    {
+      "title": "Запорожская область",
+      "file": "TAIGA-ZAPOROZHYE.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ZAPOROZHYE.map",
+      "bytes": 39257382,
       "updated": "2026-08-20"
     },
     {
@@ -219,6 +233,13 @@
       "updated": "2026-08-20"
     },
     {
+      "title": "Крым и Севастополь",
+      "file": "TAIGA-CRIMEA.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-CRIMEA.map",
+      "bytes": 37563283,
+      "updated": "2026-08-20"
+    },
+    {
       "title": "Курганская область",
       "file": "TAIGA-KURGAN.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KURGAN.map",
@@ -245,6 +266,13 @@
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-LIPETSK.map",
       "bytes": 50336070,
       "updated": "2026-08-18"
+    },
+    {
+      "title": "Луганская Народная Республика",
+      "file": "TAIGA-LUGANSK.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-LUGANSK.map",
+      "bytes": 65748995,
+      "updated": "2026-08-20"
     },
     {
       "title": "Магаданская область",
@@ -531,6 +559,13 @@
       "file": "TAIGA-KHANTY_MANSI.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KHANTY_MANSI.map",
       "bytes": 157791798,
+      "updated": "2026-08-20"
+    },
+    {
+      "title": "Херсонская область",
+      "file": "TAIGA-KHERSON.map",
+      "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KHERSON.map",
+      "bytes": 44972065,
       "updated": "2026-08-20"
     },
     {
