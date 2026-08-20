@@ -63,7 +63,12 @@
       "VOLGOGRAD",
       "KALMYKIA",
       "KRASNODAR",
-      "ROSTOV"
+      "ROSTOV",
+      "CRIMEA",
+      "DONETSK",
+      "LUGANSK",
+      "ZAPOROZHYE",
+      "KHERSON"
     ],
     "КАВКАЗ": [
       "DAGESTAN",
@@ -192,10 +197,21 @@
       "CHUKOTKA_EAST",
       "CHUKOTKA",
       "YAMALO_NENETS",
-      "YAROSLAVL"
+      "YAROSLAVL",
+      "CRIMEA",
+      "DONETSK",
+      "LUGANSK",
+      "ZAPOROZHYE",
+      "KHERSON"
     ]
   },
   "regions": [
+    {
+      "key": "AUSTRALIA_SE",
+      "title": "Австралия, юго-восток",
+      "source": "australia-oceania/australia",
+      "bbox": "140.90,-39.20,153.70,-28.10"
+    },
     {
       "key": "ADYGEA",
       "title": "Адыгея",
@@ -269,10 +285,22 @@
       "bbox": "38.088,49.508,42.997,52.153"
     },
     {
+      "key": "VIETNAM",
+      "title": "Вьетнам",
+      "source": "asia/vietnam",
+      "bbox": ""
+    },
+    {
       "key": "DAGESTAN",
       "title": "Дагестан",
       "source": "russia/north-caucasus-fed-district",
       "bbox": "45.053,41.135,48.859,45.042"
+    },
+    {
+      "key": "DONETSK",
+      "title": "Донецкая Народная Республика",
+      "source": "europe/ukraine",
+      "bbox": "36.492,46.638,39.141,49.284"
     },
     {
       "key": "JEWISH_AO",
@@ -285,6 +313,12 @@
       "title": "Забайкальский край",
       "source": "russia/siberian-fed-district",
       "bbox": "107.684,49.104,122.196,58.487"
+    },
+    {
+      "key": "ZAPOROZHYE",
+      "title": "Запорожская область",
+      "source": "europe/ukraine",
+      "bbox": "34.089,46.096,37.299,48.195"
     },
     {
       "key": "IVANOVO",
@@ -371,16 +405,22 @@
       "bbox": "36.480,43.174,41.794,47.053"
     },
     {
+      "key": "KRASNOYARSK_NORTH",
+      "title": "Красноярский край (север)",
+      "source": "russia/siberian-fed-district",
+      "bbox": "74.937,58.000,114.790,81.524"
+    },
+    {
       "key": "KRASNOYARSK_SOUTH",
       "title": "Красноярский край (юг)",
       "source": "russia/siberian-fed-district",
       "bbox": "74.937,51.722,114.790,58.000"
     },
     {
-      "key": "KRASNOYARSK_NORTH",
-      "title": "Красноярский край (север)",
-      "source": "russia/siberian-fed-district",
-      "bbox": "74.937,58.000,114.790,81.524"
+      "key": "CRIMEA",
+      "title": "Крым и Севастополь",
+      "source": "europe/ukraine",
+      "bbox": "32.152,44.135,36.732,46.280"
     },
     {
       "key": "KURGAN",
@@ -405,6 +445,12 @@
       "title": "Липецкая область",
       "source": "russia/central-fed-district",
       "bbox": "37.672,51.837,40.815,53.637"
+    },
+    {
+      "key": "LUGANSK",
+      "title": "Луганская Народная Республика",
+      "source": "europe/ukraine",
+      "bbox": "37.787,47.775,40.278,50.138"
     },
     {
       "key": "MAGADAN",
@@ -653,6 +699,12 @@
       "bbox": "59.154,58.530,86.027,65.768"
     },
     {
+      "key": "KHERSON",
+      "title": "Херсонская область",
+      "source": "europe/ukraine",
+      "bbox": "31.109,45.707,35.518,47.650"
+    },
+    {
       "key": "CHELYABINSK",
       "title": "Челябинская область",
       "source": "russia/ural-fed-district",
@@ -693,18 +745,6 @@
       "title": "Ярославская область",
       "source": "russia/central-fed-district",
       "bbox": "37.278,56.484,41.243,59.006"
-    },
-    {
-      "key": "VIETNAM",
-      "title": "Вьетнам",
-      "source": "asia/vietnam",
-      "bbox": ""
-    },
-    {
-      "key": "AUSTRALIA_SE",
-      "title": "Австралия, юго-восток",
-      "source": "australia-oceania/australia",
-      "bbox": "140.90,-39.20,153.70,-28.10"
     }
   ]
 }
