@@ -428,12 +428,36 @@ jobs:
           test "$size" -gt 1000000
           head -c 20 "TAIGA-${{ matrix.region }}.map" | grep -qa "mapsforge binary OSM"
 
+      # ДОБАВЛЕНО ПО АУДИТУ 21.08.2026. Отпечаток рядом с картой.
+      #
+      # Разбираемый дефект: приложение после закачки сверяло одну длину.
+      # Длина ловит обрыв связи и больше ничего — ни файла, побитого
+      # на диске телефона, ни подмены по дороге. Настоящий отпечаток
+      # можно посчитать только здесь: список карт собирается из данных
+      # релиза, а там контрольной суммы нет, и считать её потом значило
+      # бы качать все восемьдесят восемь карт заново.
+      #
+      # Кладём отпечаток отдельным файлом рядом с картой. Он весит
+      # сотню байт, а список карт потом соберёт из них поле sha256.
+      # У карт, собранных раньше, такого файла нет — приложение это
+      # переживает и проверяет их только по подписи формата.
+      - name: Посчитать отпечаток карты
+        run: |
+          sha256sum "TAIGA-${{ matrix.region }}.map" \
+            | cut -d' ' -f1 > "TAIGA-${{ matrix.region }}.map.sha256"
+          cat "TAIGA-${{ matrix.region }}.map.sha256"
+
       - name: Положить карту в релиз
         timeout-minutes: 40
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release upload "$RELEASE_TAG" "TAIGA-${{ matrix.region }}.map" --clobber
+          # Отпечаток кладём ПОСЛЕ карты: если выкладывание карты
+          # оборвётся, в релизе не должно остаться отпечатка от файла,
+          # которого там нет, — иначе приложение будет отвергать
+          # старую карту, сверяя её с чужим отпечатком.
+          gh release upload "$RELEASE_TAG" "TAIGA-${{ matrix.region }}.map.sha256" --clobber
 
   list:
     name: Обновить список карт
@@ -460,9 +484,22 @@ jobs:
           # не оставит в списке строку, ведущую в никуда, а приложение не
           # покажет карту, которой нет.
           gh release view "$RELEASE_TAG" --json assets > assets.json
+          # Отпечатки лежат в релизе отдельными файлами по сотне байт.
+          # Качаем их все одной командой — это секунды. Если ни одного
+          # ещё нет (первый запуск после этой правки), gh ругается,
+          # и это не повод останавливать обновление списка.
+          mkdir -p sums
+          gh release download "$RELEASE_TAG" --pattern '*.map.sha256' \
+            --dir sums --clobber || echo "отпечатков в релизе пока нет"
           python3 - <<'PY'
-          import json, os, datetime
+          import json, os, datetime, glob
           assets = json.load(open("assets.json"))["assets"]
+          sums = {}
+          for path in glob.glob("sums/*.map.sha256"):
+              name = os.path.basename(path)[:-len(".sha256")]
+              value = open(path).read().strip().split()[0] if os.path.getsize(path) else ""
+              if len(value) == 64:
+                  sums[name] = value.lower()
           titles = {r["key"]: r["title"] for r in json.load(open("regions.json"))["regions"]}
           was = {m["file"]: m for m in json.load(open("maps.json"))["maps"]}
           repo = os.environ["GITHUB_REPOSITORY"]
@@ -482,6 +519,10 @@ jobs:
                   "bytes": a["size"],
                   "updated": (a.get("updatedAt") or a.get("createdAt") or "")[:10]
                              or datetime.date.today().isoformat(),
+                  # Отпечатка может не быть: у карт, собранных до
+                  # 21.08.2026, его никто не считал. Пустое поле
+                  # приложение понимает как «проверять нечем».
+                  "sha256": sums.get(name, was.get(name, {}).get("sha256", "")),
               })
           # Старое имя без приставки TAIGA остаётся в релизе, пока не
           # собрана замена. Как только замена появилась — старое из
