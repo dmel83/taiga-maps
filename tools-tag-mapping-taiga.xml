@@ -122,7 +122,7 @@
 
     <!-- TOURISM TAGS -->
     <pois>
-        <osm-tag key="tourism" value="alpine_hut" zoom-appear="15"/>
+        <osm-tag key="tourism" value="alpine_hut" zoom-appear="12"/>
         <osm-tag key='tourism' value='camp_site' zoom-appear='12' />
         <osm-tag key='tourism' value='caravan_site' zoom-appear='12' />
         <osm-tag key="tourism" value="hostel" zoom-appear="15"/>
@@ -150,7 +150,7 @@
     <pois>
         <osm-tag key="natural" value="cave_entrance" zoom-appear="14"/>
         <osm-tag key="natural" value="peak" zoom-appear="12"/>
-        <osm-tag key="natural" value="spring" zoom-appear="17"/>
+        <osm-tag key="natural" value="spring" zoom-appear="13"/>
         <osm-tag key="natural" value="volcano" zoom-appear="12"/>
     </pois>
 
@@ -251,13 +251,13 @@
         <osm-tag key="waterway" value="drain" zoom-appear="13"/>
         <osm-tag key="waterway" value="river" zoom-appear="5"/>
         <osm-tag key="waterway" value="riverbank" zoom-appear="8"/>
-        <osm-tag key="waterway" value="stream" zoom-appear="13"/>
+        <osm-tag key="waterway" value="stream" zoom-appear="12"/>
     </ways>
 
     <!-- LANDUSE TAGS -->
     <ways>
         <osm-tag key="landuse" value="allotments" zoom-appear="12"/>
-        <osm-tag key="landuse" value="basin" zoom-appear="12"/>
+        <osm-tag key="landuse" value="basin" zoom-appear="10"/>
         <osm-tag key="landuse" value="brownfield" zoom-appear="12"/>
         <osm-tag key="landuse" value="cemetery" zoom-appear="12"/>
         <osm-tag key="landuse" value="commercial" zoom-appear="12"/>
@@ -277,7 +277,7 @@
         <osm-tag key="landuse" value="quarry" zoom-appear="12"/>
         <osm-tag key="landuse" value="railway" zoom-appear="12"/>
         <osm-tag key="landuse" value="recreation_ground" zoom-appear="12"/>
-        <osm-tag key="landuse" value="reservoir" zoom-appear="12"/>
+        <osm-tag key="landuse" value="reservoir" zoom-appear="5"/>
         <osm-tag key="landuse" value="residential" zoom-appear="10"/>
         <osm-tag key="landuse" value="retail" zoom-appear="12"/>
         <osm-tag key="landuse" value="village_green" zoom-appear="12"/>
@@ -707,6 +707,31 @@
          Оформление честно рисовало то, что ему дали, — а дали мало.
          ================================================================ -->
 
+    <!-- ИЗМЕНЕНО 04.10.2026: ВОДОЁМЫ И СТОЯНКИ. Сверено с оформлением
+         приложения правило за правилом (themes/taiga-light.xml) и с числами
+         по России (taginfo Geofabrik, 03.10.2026).
+
+         РАЗБИРАЕМЫЙ ДЕФЕКТ. Оформление просило показать объект раньше,
+         чем он лежал в файле карты, — а чего нет в файле, того не нарисует
+         никакое оформление:
+          - водохранилища, нанесённые как landuse=reservoir (9 536 по России),
+            лежали в карте только с 12-го приближения, а оформление рисует
+            воду с самого обзора. На обзоре области они пропадали, хотя
+            озёра рядом были видны. Теперь с 5-го, как озёра; бассейны
+            и отстойники (landuse=basin) — с 10-го;
+          - родники (16 235) лежали только с 17-го — это уровень отдельных
+            домов, а оформление и подписи ждут их с 13-го. Теперь с 13-го;
+          - ручьи — с 13-го при оформлении с 12-го. Теперь с 12-го: это тот
+            же слой файла (12–21), вес карты почти не растёт;
+          - лабазы — с 15-го, избы — с 13-го, горные приюты — с 15-го
+            при оформлении с 12–13-го;
+          - избы и приюты, нанесённые контуром (около 700), в карту не
+            попадали вовсе — записывались только точками;
+          - мест рыбалки (leisure=fishing, 2 008) и кострищ (leisure=firepit,
+            1 911) в карте не было совсем. Для приложения с режимом
+            «Рыбалка» и ночёвками в лесу это прямой пробел.
+         Порядок важен: при повторе одного тега писатель карт берёт ПЕРВОЕ
+         упоминание, поэтому приюты исправлены и в разделе TOURISM выше. -->
     <!-- Точечные ориентиры леса. В городе ориентируются по домам,
          в лесу — по опоре ЛЭП, геодезическому пункту, роднику и броду. -->
     <pois>
@@ -718,12 +743,14 @@
         <osm-tag key="man_made" value="chimney" zoom-appear="13"/>
         <osm-tag key="power" value="tower" zoom-appear="14"/>
         <osm-tag key="power" value="pole" zoom-appear="16"/>
-        <osm-tag key="amenity" value="hunting_stand" zoom-appear="15"/>
+        <osm-tag key="amenity" value="hunting_stand" zoom-appear="13"/>
         <osm-tag key="amenity" value="shelter" zoom-appear="14"/>
         <osm-tag key="amenity" value="drinking_water" zoom-appear="16"/>
-        <osm-tag key="tourism" value="wilderness_hut" zoom-appear="13"/>
-        <osm-tag key="tourism" value="alpine_hut" zoom-appear="13"/>
-        <osm-tag key="tourism" value="camp_site" zoom-appear="13"/>
+        <osm-tag key="tourism" value="wilderness_hut" zoom-appear="12"/>
+        <osm-tag key="tourism" value="alpine_hut" zoom-appear="12"/>
+        <osm-tag key="tourism" value="camp_site" zoom-appear="12"/>
+        <osm-tag key="leisure" value="fishing" zoom-appear="13"/>
+        <osm-tag key="leisure" value="firepit" zoom-appear="15"/>
         <osm-tag key="tourism" value="picnic_site" zoom-appear="15"/>
         <osm-tag key="natural" value="tree" zoom-appear="17"/>
         <osm-tag key="natural" value="rock" zoom-appear="15"/>
@@ -763,6 +790,9 @@
         <osm-tag key="landuse" value="plant_nursery" zoom-appear="14"/>
         <osm-tag key="landuse" value="greenhouse_horticulture" zoom-appear="14"/>
         <osm-tag key="leisure" value="nature_reserve" zoom-appear="10"/>
+        <osm-tag key="leisure" value="fishing" zoom-appear="12"/>
+        <osm-tag key="tourism" value="wilderness_hut" zoom-appear="12"/>
+        <osm-tag key="tourism" value="alpine_hut" zoom-appear="12"/>
         <osm-tag key="boundary" value="protected_area" zoom-appear="10"/>
         <osm-tag key="boundary" value="forest_compartment" zoom-appear="13"/>
         <osm-tag key="railway" value="abandoned" zoom-appear="14"/>
