@@ -1,0 +1,81 @@
+# Сборка спутникового снимка области для приложения ТАЙГА.
+#
+# ДОБАВЛЕНО 04.10.2026 — проба спутника на Ленинградской области.
+# Что за снимок, чья лицензия и почему именно так — в шапке
+# tools-sputnik.py.
+#
+# КАК ЗАПУСТИТЬ. Как и карты — файлом заказа: вписать в
+# zakaz-sputnik.txt ключ области (LENOBL) и сохранить. Строки
+# с решёткой — комментарии. Одна область за раз: снимок качается
+# с чужого бесплатного сервера, и вежливо это делать по одной.
+#
+# НЕ ЗАПУСКАТЬ ДО ОТВЕТА EOX на письмо о выгрузке (cloudless@eox.at).
+#
+# Готовый файл кладётся на полку области — в выпуск TAIGA-<КЛЮЧ>,
+# рядом с пакетами слоёв: там его ищет приложение (region/SatPack).
+# Рядом — файл с отпечатком SHA-256.
+
+name: Собрать спутник ТАЙГА
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - zakaz-sputnik.txt
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sputnik
+  cancel-in-progress: false
+
+jobs:
+  sputnik:
+    name: Спутник
+    runs-on: ubuntu-latest
+    # Около 40 000 плиток по три в секунду — почти четыре часа.
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Разобрать заказ
+        id: order
+        run: |
+          KEY="$(grep -v '^[[:space:]]*#' zakaz-sputnik.txt | tr -d '\r[:space:]' | head -c 40)"
+          if [ -z "$KEY" ]; then
+            echo "Заказ пуст — собирать нечего."
+            exit 1
+          fi
+          case "$KEY" in
+            *[!A-Z0-9_-]*) echo "Странный ключ области: $KEY"; exit 1 ;;
+          esac
+          echo "key=$KEY" >> "$GITHUB_OUTPUT"
+
+      - name: Посчитать плитки
+        run: python3 tools-sputnik.py --key "${{ steps.order.outputs.key }}" --count-only
+
+      - name: Скачать снимок
+        run: python3 tools-sputnik.py --key "${{ steps.order.outputs.key }}" --rate 3
+
+      - name: Проверить файл
+        run: |
+          F="TAIGA-${{ steps.order.outputs.key }}-satellite.mbtiles"
+          ls -l "$F"
+          # Меньше мегабайта на область — значит скачалось не то.
+          [ "$(stat -c %s "$F")" -gt 1048576 ]
+          python3 -c "import sqlite3,sys; d=sqlite3.connect(sys.argv[1]); print('плиток:', d.execute('select count(*) from tiles').fetchone()[0]); print(d.execute(\"select value from metadata where name='attribution'\").fetchone()[0])" "$F"
+          sha256sum "$F" | cut -d' ' -f1 > "$F.sha256"
+
+      - name: Положить на полку области
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="TAIGA-${{ steps.order.outputs.key }}"
+          F="$TAG-satellite.mbtiles"
+          gh release view "$TAG" >/dev/null 2>&1 || \
+            gh release create "$TAG" --title "$TAG: слои области" \
+              --notes "Пакеты слоёв и спутниковый снимок области для приложения ТАЙГА."
+          gh release upload "$TAG" "$F" --clobber
+          gh release upload "$TAG" "$F.sha256" --clobber
