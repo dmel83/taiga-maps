@@ -5,617 +5,705 @@
       "title": "Адыгея",
       "file": "TAIGA-ADYGEA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ADYGEA.map",
-      "bytes": 50677848,
-      "updated": "2026-08-19"
+      "bytes": 50947687,
+      "updated": "2026-10-04",
+      "sha256": "52d1cd16202a6e63890cb5e4213af40711dcd70404fe1b475160476c6fe948be"
     },
     {
       "title": "Алтайский край",
       "file": "TAIGA-ALTAI_KRAI.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ALTAI_KRAI.map",
-      "bytes": 185087731,
-      "updated": "2026-08-20"
+      "bytes": 185297098,
+      "updated": "2026-10-04",
+      "sha256": "432eb0b170b7e5842fff50798c5a031a01a0b6e877dfc95d7bdf062eac3ee759"
     },
     {
       "title": "Амурская область",
       "file": "TAIGA-AMUR.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-AMUR.map",
-      "bytes": 40865517,
-      "updated": "2026-08-20"
+      "bytes": 41163613,
+      "updated": "2026-10-04",
+      "sha256": "c18989a6151b3f783ba213de8085e800b9eae2471c19b363e96f241b38e9e6d1"
     },
     {
       "title": "Архангельская область (материк)",
       "file": "TAIGA-ARKHANGELSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ARKHANGELSK.map",
-      "bytes": 137094198,
-      "updated": "2026-08-18"
+      "bytes": 137190453,
+      "updated": "2026-10-04",
+      "sha256": "aab0fcfc349221fc480246dd156271442dde941ac8153b06faf8bd16f2ac9645"
     },
     {
       "title": "Астраханская область",
       "file": "TAIGA-ASTRAKHAN.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ASTRAKHAN.map",
-      "bytes": 25677092,
-      "updated": "2026-08-19"
+      "bytes": 25701112,
+      "updated": "2026-10-04",
+      "sha256": "b22115b3af19dfc590e0632cb2e3145010a64bcd397ade9d5ed1ae78244815ad"
     },
     {
       "title": "Башкортостан",
       "file": "TAIGA-BASHKORTOSTAN.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-BASHKORTOSTAN.map",
-      "bytes": 140459165,
-      "updated": "2026-08-19"
+      "bytes": 141609664,
+      "updated": "2026-10-04",
+      "sha256": "9fbb658cfcf114bcfe0665e910f69204fb844f767e1e723e84b08c7af0a7e1cf"
     },
     {
       "title": "Белгородская область",
       "file": "TAIGA-BELGOROD.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-BELGOROD.map",
-      "bytes": 49862275,
-      "updated": "2026-08-18"
+      "bytes": 49907970,
+      "updated": "2026-10-04",
+      "sha256": "10b93f6b3ffb38de6b3a67c6e678f91ddf3660bc17723e36edc6e65d0fcb8191"
     },
     {
       "title": "Брянская область",
       "file": "TAIGA-BRYANSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-BRYANSK.map",
-      "bytes": 43081038,
-      "updated": "2026-08-18"
+      "bytes": 43960518,
+      "updated": "2026-10-04",
+      "sha256": "0c9f6cb095fe3540f4bbddbbc57223168792ed68554b87a14fa5ffa523a6f2e3"
     },
     {
       "title": "Владимирская область",
       "file": "TAIGA-VLADIMIR.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-VLADIMIR.map",
-      "bytes": 107785115,
-      "updated": "2026-08-18"
+      "bytes": 108698894,
+      "updated": "2026-10-04",
+      "sha256": "6be19424287f18f3f01effaaa6c29035287e83c91acf0c8e9d19733cf7c45442"
     },
     {
       "title": "Волгоградская область",
       "file": "TAIGA-VOLGOGRAD.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-VOLGOGRAD.map",
-      "bytes": 74988249,
-      "updated": "2026-08-19"
+      "bytes": 75781093,
+      "updated": "2026-10-04",
+      "sha256": "ebe880b24059ed9df7baed5aa9711a7fef0ae0d1441be2df546d1085dfebd89b"
     },
     {
       "title": "Вологодская область",
       "file": "TAIGA-VOLOGDA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-VOLOGDA.map",
-      "bytes": 87609694,
-      "updated": "2026-08-18"
+      "bytes": 87664727,
+      "updated": "2026-10-04",
+      "sha256": "f00800f2a5be7ee8f2f0375c024b3718ab7afa17fc27f0b0a5a0d59ba580ce14"
     },
     {
       "title": "Воронежская область",
       "file": "TAIGA-VORONEZH.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-VORONEZH.map",
-      "bytes": 72059341,
-      "updated": "2026-08-18"
+      "bytes": 72949662,
+      "updated": "2026-10-04",
+      "sha256": "84a956e9bb8ccf929f2d5705857c37e0433df54f8277997efa9be81ca2b78cde"
     },
     {
       "title": "Дагестан",
       "file": "TAIGA-DAGESTAN.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-DAGESTAN.map",
-      "bytes": 52048265,
-      "updated": "2026-08-19"
+      "bytes": 52264565,
+      "updated": "2026-10-04",
+      "sha256": "06e7c1d200f6123fb6c79aae6344558c340384158e313bbc69046761a02414ad"
     },
     {
       "title": "Донецкая Народная Республика",
       "file": "TAIGA-DONETSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-DONETSK.map",
-      "bytes": 82417251,
-      "updated": "2026-08-20"
+      "bytes": 82601138,
+      "updated": "2026-10-04",
+      "sha256": "3025d38d80650cd0f99cbe3444d94ef4b35b00adccff4339a051b308964e9f47"
     },
     {
       "title": "Еврейская автономная область",
       "file": "TAIGA-JEWISH_AO.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-JEWISH_AO.map",
-      "bytes": 10945228,
-      "updated": "2026-08-20"
+      "bytes": 10952157,
+      "updated": "2026-10-04",
+      "sha256": "b4ae03668f8f61c5c8fbe1ec3a4b84b0073116674ef580ff1fec09c1e7b01f5d"
     },
     {
       "title": "Забайкальский край",
       "file": "TAIGA-ZABAIKALYE.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ZABAIKALYE.map",
-      "bytes": 52039157,
-      "updated": "2026-08-20"
+      "bytes": 54924214,
+      "updated": "2026-10-04",
+      "sha256": "cdf35994d0be68e08f245fb262255368ca061ea2f21636f626a65752cc1b072a"
     },
     {
       "title": "Запорожская область",
       "file": "TAIGA-ZAPOROZHYE.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ZAPOROZHYE.map",
-      "bytes": 39257382,
-      "updated": "2026-08-20"
+      "bytes": 39362423,
+      "updated": "2026-10-04",
+      "sha256": "c133b2d6cd16a628a78faa07437878845cda12c956fec5e15e7dabd00164a3f8"
     },
     {
       "title": "Ивановская область",
       "file": "TAIGA-IVANOVO.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-IVANOVO.map",
-      "bytes": 51139254,
-      "updated": "2026-08-18"
+      "bytes": 51238017,
+      "updated": "2026-10-04",
+      "sha256": "79c8f9024f8c3abeef6bd300bf855193d556dc020f76e84788d47f2caafe6d2c"
     },
     {
       "title": "Ингушетия",
       "file": "TAIGA-INGUSHETIA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-INGUSHETIA.map",
-      "bytes": 8384476,
-      "updated": "2026-08-19"
+      "bytes": 8409670,
+      "updated": "2026-10-04",
+      "sha256": "d4e780966e89010974d23d532cc7017bbc1394f98298c1f9150b1eebecb1a6ad"
     },
     {
       "title": "Иркутская область",
       "file": "TAIGA-IRKUTSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-IRKUTSK.map",
-      "bytes": 142995280,
-      "updated": "2026-08-20"
+      "bytes": 146264152,
+      "updated": "2026-10-04",
+      "sha256": "9d1f2388174accf10606dd5a523abd20df448cc1df84f23734a32181636970bd"
     },
     {
       "title": "Кабардино-Балкария",
       "file": "TAIGA-KABARDINO.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KABARDINO.map",
-      "bytes": 28318071,
-      "updated": "2026-08-19"
+      "bytes": 28417177,
+      "updated": "2026-10-04",
+      "sha256": "8cd901a42946f3dfbc6d31198e4a091106912bd53f6718244bbde7f91ec5631e"
     },
     {
       "title": "Калининградская область",
       "file": "TAIGA-KALININGRAD.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KALININGRAD.map",
-      "bytes": 28875941,
-      "updated": "2026-08-18"
+      "bytes": 29797598,
+      "updated": "2026-10-04",
+      "sha256": "7d2ef460919e6be6eb916bfa60e954b357aef5771b06ea8d5a06dfb28fe8de44"
     },
     {
       "title": "Калмыкия",
       "file": "TAIGA-KALMYKIA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KALMYKIA.map",
-      "bytes": 29729850,
-      "updated": "2026-08-19"
+      "bytes": 29944867,
+      "updated": "2026-10-04",
+      "sha256": "f6426b203cc8f5f0a73df3d477d608b5d58ecccdcb5a739ef7e6df75016fc238"
     },
     {
       "title": "Калужская область",
       "file": "TAIGA-KALUGA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KALUGA.map",
-      "bytes": 65912345,
-      "updated": "2026-08-18"
+      "bytes": 66626510,
+      "updated": "2026-10-04",
+      "sha256": "42d4dfd854d41bf62a6ed02ab277115594508cc61f92bb0c430ac3ad6a3e5f43"
     },
     {
       "title": "Камчатский край",
       "file": "TAIGA-KAMCHATKA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KAMCHATKA.map",
-      "bytes": 53354836,
-      "updated": "2026-08-20"
+      "bytes": 54665807,
+      "updated": "2026-10-04",
+      "sha256": "0879a33cec101b9f6e598b4b3a71360fd0a699faa14a1638350904e5de7af47a"
     },
     {
       "title": "Карачаево-Черкесия",
       "file": "TAIGA-KARACHAY.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KARACHAY.map",
-      "bytes": 22713203,
-      "updated": "2026-08-19"
+      "bytes": 22748261,
+      "updated": "2026-10-04",
+      "sha256": "1362198633e764c4305b1dd0b2b80f09e7573d16b8dfffc6f801f92f7a76fd43"
     },
     {
       "title": "Карелия",
       "file": "TAIGA-KARELIA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KARELIA.map",
-      "bytes": 189844943,
-      "updated": "2026-08-18"
+      "bytes": 191201441,
+      "updated": "2026-10-04",
+      "sha256": "eb526e769c513de3bec247be98521894b50f587ae17344f71624244eb5a6d63f"
     },
     {
       "title": "Кемеровская область",
       "file": "TAIGA-KEMEROVO.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KEMEROVO.map",
-      "bytes": 93178440,
-      "updated": "2026-08-20"
+      "bytes": 93304595,
+      "updated": "2026-10-04",
+      "sha256": "c3a247a3ed6ed40da3c53c7dac63d5f62d750fa9aac987dfaa0caa9ce9cda4c1"
     },
     {
       "title": "Кировская область",
       "file": "TAIGA-KIROV.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KIROV.map",
-      "bytes": 220270901,
-      "updated": "2026-08-20"
+      "bytes": 220626909,
+      "updated": "2026-10-04",
+      "sha256": "45c77a0439a9f1b45773c1c492e3b792e0039fce44c7d0ee1a568b10e4c440fa"
     },
     {
       "title": "Костромская область",
       "file": "TAIGA-KOSTROMA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KOSTROMA.map",
-      "bytes": 34605901,
-      "updated": "2026-08-18"
+      "bytes": 34625183,
+      "updated": "2026-10-04",
+      "sha256": "8061550e10ccac0d91358e0cace187ecfe2b9bcf225d7c20137cd58c542f9cc9"
     },
     {
       "title": "Краснодарский край",
       "file": "TAIGA-KRASNODAR.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KRASNODAR.map",
-      "bytes": 150153682,
-      "updated": "2026-08-19"
+      "bytes": 151351375,
+      "updated": "2026-10-04",
+      "sha256": "b8cdf5ea9359e1124e82caf73e28379e1fcefd23794923d5a6686803d57a85dd"
     },
     {
       "title": "Красноярский край (север)",
       "file": "TAIGA-KRASNOYARSK_NORTH.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KRASNOYARSK_NORTH.map",
-      "bytes": 135297846,
-      "updated": "2026-08-20"
+      "bytes": 135892287,
+      "updated": "2026-10-04",
+      "sha256": "a08eab9a47b05ba11c3e8049541110739086978668908abeaf5b557ef3e1f881"
     },
     {
       "title": "Красноярский край (юг)",
       "file": "TAIGA-KRASNOYARSK_SOUTH.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KRASNOYARSK_SOUTH.map",
-      "bytes": 425738704,
-      "updated": "2026-08-20"
+      "bytes": 429206171,
+      "updated": "2026-10-04",
+      "sha256": "07606a1dece81b27d2af3884294719f2586034f459d3038d80b1c180c2aaa93f"
     },
     {
       "title": "Крым и Севастополь",
       "file": "TAIGA-CRIMEA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-CRIMEA.map",
-      "bytes": 37563283,
-      "updated": "2026-08-20"
+      "bytes": 37685681,
+      "updated": "2026-10-04",
+      "sha256": "06645a665d9cadc165d0417de19d41dec361433b6912b46354b906cb9c4fe0a7"
     },
     {
       "title": "Курганская область",
       "file": "TAIGA-KURGAN.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KURGAN.map",
-      "bytes": 59121775,
-      "updated": "2026-08-20"
+      "bytes": 59261497,
+      "updated": "2026-10-04",
+      "sha256": "ac4d1b84bfcc48e726aca0b8673ad862557fa3c6f92891c96c47223133831a60"
     },
     {
       "title": "Курская область",
       "file": "TAIGA-KURSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KURSK.map",
-      "bytes": 69754735,
-      "updated": "2026-08-18"
+      "bytes": 70127809,
+      "updated": "2026-10-04",
+      "sha256": "687f3947d27e82ae83113e2429b6123b10a92b0256f039818bb37ff9fb1340fa"
     },
     {
       "title": "Ленинградская область и Санкт-Петербург",
       "file": "TAIGA-LENOBL.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-LENOBL.map",
-      "bytes": 197279140,
-      "updated": "2026-08-18"
+      "bytes": 198090743,
+      "updated": "2026-10-04",
+      "sha256": "a8af4683fd8bd46b2ce52b984e7061506ccf1b418920e6cb7c3cfd382dd72359"
     },
     {
       "title": "Липецкая область",
       "file": "TAIGA-LIPETSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-LIPETSK.map",
-      "bytes": 50336070,
-      "updated": "2026-08-18"
+      "bytes": 50504438,
+      "updated": "2026-10-04",
+      "sha256": "dbcdb7632bcbf2d93aa5dbb82fb761db5e9719a9b158f9b46f4291fffcd9146c"
     },
     {
       "title": "Луганская Народная Республика",
       "file": "TAIGA-LUGANSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-LUGANSK.map",
-      "bytes": 65748995,
-      "updated": "2026-08-20"
+      "bytes": 66022192,
+      "updated": "2026-10-04",
+      "sha256": "43074c189625b8a4b5f39276ba488e3b836f75cd6fb6754a0e74def0ecd937c6"
     },
     {
       "title": "Магаданская область",
       "file": "TAIGA-MAGADAN.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-MAGADAN.map",
-      "bytes": 28970798,
-      "updated": "2026-08-20"
+      "bytes": 29039351,
+      "updated": "2026-10-04",
+      "sha256": "1e80e9c82468e35125a0a3cf5d526cda6abb32056226dc262ff43c3858c95611"
     },
     {
       "title": "Марий Эл",
       "file": "TAIGA-MARIY_EL.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-MARIY_EL.map",
-      "bytes": 66264142,
-      "updated": "2026-08-19"
+      "bytes": 66597443,
+      "updated": "2026-10-04",
+      "sha256": "52ca3330b89875550f0a51891bbbe69d43d4d2e5acc7cb036a3fb73c915d5620"
     },
     {
       "title": "Мордовия",
       "file": "TAIGA-MORDOVIA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-MORDOVIA.map",
-      "bytes": 45329829,
-      "updated": "2026-08-19"
+      "bytes": 45321673,
+      "updated": "2026-10-04",
+      "sha256": "c96b9e959f0175fd91489e5ec63fee921a1fb601b422dda445bf905782a36975"
     },
     {
       "title": "Московская область и Москва",
       "file": "TAIGA-MOSOBL.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-MOSOBL.map",
-      "bytes": 304060613,
-      "updated": "2026-08-18"
+      "bytes": 306344823,
+      "updated": "2026-10-04",
+      "sha256": "2dcb0492726113b05b56bb64ae1a56cba3b432dcb084bda73e2cf88aa2ff4278"
     },
     {
       "title": "Мурманская область",
       "file": "TAIGA-MURMANSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-MURMANSK.map",
-      "bytes": 82920417,
-      "updated": "2026-08-18"
+      "bytes": 82993405,
+      "updated": "2026-10-04",
+      "sha256": "3e4197ca82c3efd561b7493bea2163cb5afbfa74f079c31eea4ead28146976b1"
     },
     {
       "title": "Ненецкий автономный округ",
       "file": "TAIGA-NENETS.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-NENETS.map",
-      "bytes": 43525550,
-      "updated": "2026-08-18"
+      "bytes": 43467522,
+      "updated": "2026-10-04",
+      "sha256": "289cee11b6a3db04a7ef9a5150b60a83b2660b65014bf07cb32b282411ce6ec1"
     },
     {
       "title": "Нижегородская область",
       "file": "TAIGA-NIZHNY_NOVGOROD.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-NIZHNY_NOVGOROD.map",
-      "bytes": 122642507,
-      "updated": "2026-08-19"
+      "bytes": 122909969,
+      "updated": "2026-10-04",
+      "sha256": "6357aa2c1080ce9110ec13e1d3e15baa6e895fc683a30d31f39f2cce7dbfa31f"
     },
     {
       "title": "Новгородская область",
       "file": "TAIGA-NOVGOROD.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-NOVGOROD.map",
-      "bytes": 51286221,
-      "updated": "2026-08-18"
+      "bytes": 51336385,
+      "updated": "2026-10-04",
+      "sha256": "72719199e4c26363da2103ccb5e227eb0dfe7b1252fb9740df95cc730aa61f71"
     },
     {
       "title": "Новосибирская область",
       "file": "TAIGA-NOVOSIBIRSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-NOVOSIBIRSK.map",
-      "bytes": 136415372,
-      "updated": "2026-08-20"
+      "bytes": 136631485,
+      "updated": "2026-10-04",
+      "sha256": "f4b522f23e96aa5f8116777abe61c98ee012b3a78a105b1973e848bf4bc2664b"
     },
     {
       "title": "Омская область",
       "file": "TAIGA-OMSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-OMSK.map",
-      "bytes": 68857489,
-      "updated": "2026-08-20"
+      "bytes": 69185660,
+      "updated": "2026-10-04",
+      "sha256": "c3d700a993c8a030663083cce406705be8cf808f419aa5fe5f224ee619fe89f1"
     },
     {
       "title": "Оренбургская область",
       "file": "TAIGA-ORENBURG.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ORENBURG.map",
-      "bytes": 112273723,
-      "updated": "2026-08-20"
+      "bytes": 112692012,
+      "updated": "2026-10-04",
+      "sha256": "89764d529532c5c897ad27de7b73568b9d574736aead72cb15849300ea175435"
     },
     {
       "title": "Орловская область",
       "file": "TAIGA-ORYOL.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ORYOL.map",
-      "bytes": 37760901,
-      "updated": "2026-08-18"
+      "bytes": 38115189,
+      "updated": "2026-10-04",
+      "sha256": "2923f2b695535e9528cb0cf97ac4b13a5802555e9d01c4b453d5f77ef835370f"
     },
     {
       "title": "Пензенская область",
       "file": "TAIGA-PENZA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-PENZA.map",
-      "bytes": 41583666,
-      "updated": "2026-08-19"
+      "bytes": 41586557,
+      "updated": "2026-10-04",
+      "sha256": "13f6c04ff5f5f0c3d3c3ae46b5d4914b38bdcf0e32eb9c9cfa59de73ecaab3c4"
     },
     {
       "title": "Пермский край",
       "file": "TAIGA-PERM.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-PERM.map",
-      "bytes": 150468200,
-      "updated": "2026-08-19"
+      "bytes": 151170319,
+      "updated": "2026-10-04",
+      "sha256": "a0c2bcf28c5a9877abee0ab43f87c3d43c640da52576aed3c96da70dfe9f9bde"
     },
     {
       "title": "Приморский край",
       "file": "TAIGA-PRIMORYE.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-PRIMORYE.map",
-      "bytes": 59223254,
-      "updated": "2026-08-20"
+      "bytes": 59370263,
+      "updated": "2026-10-04",
+      "sha256": "44aab45576b39d178e81a5e32e9f490bf40f9507a8f8379bd43ab03a9ec5d28d"
     },
     {
       "title": "Псковская область",
       "file": "TAIGA-PSKOV.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-PSKOV.map",
-      "bytes": 77282254,
-      "updated": "2026-08-18"
+      "bytes": 77588063,
+      "updated": "2026-10-04",
+      "sha256": "b6b7f50dd452fb71b2aecea2ef0654ac3fffda026506faaa40242b88ccf0d074"
     },
     {
       "title": "Республика Алтай",
       "file": "TAIGA-ALTAI_REP.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ALTAI_REP.map",
-      "bytes": 94355955,
-      "updated": "2026-08-20"
+      "bytes": 94444047,
+      "updated": "2026-10-04",
+      "sha256": "a8f6985e3496af5ee44c8af28ed9167f2d7232c1ec30d454f112cd97cd7eba59"
     },
     {
       "title": "Республика Бурятия",
       "file": "TAIGA-BURYATIA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-BURYATIA.map",
-      "bytes": 107526578,
-      "updated": "2026-08-20"
+      "bytes": 110473543,
+      "updated": "2026-10-04",
+      "sha256": "5e39f2584fc08cbf173c55515667402497e8f4781f8675946f4adffd92c2924c"
     },
     {
       "title": "Республика Коми",
       "file": "TAIGA-KOMI.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KOMI.map",
-      "bytes": 125418887,
-      "updated": "2026-08-18"
+      "bytes": 126377190,
+      "updated": "2026-10-04",
+      "sha256": "476b1a666a4c15edb92d4c0d22870cc9c39e7011eaa6d79ac89c09eb0c8189b0"
     },
     {
       "title": "Республика Саха (Якутия)",
       "file": "TAIGA-YAKUTIA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-YAKUTIA.map",
-      "bytes": 263326064,
-      "updated": "2026-08-20"
+      "bytes": 264090612,
+      "updated": "2026-10-04",
+      "sha256": "3e9244913124d6f075d9c4eafac7169409ac65115439737cd1a9de4f02e40848"
     },
     {
       "title": "Республика Тыва",
       "file": "TAIGA-TYVA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-TYVA.map",
-      "bytes": 27632156,
-      "updated": "2026-08-20"
+      "bytes": 27717056,
+      "updated": "2026-10-04",
+      "sha256": "3a3e7bff982102c8f66a435616f812f7601518b20fcead994bb8f81dd4dae89f"
     },
     {
       "title": "Республика Хакасия",
       "file": "TAIGA-KHAKASSIA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KHAKASSIA.map",
-      "bytes": 25619297,
-      "updated": "2026-08-20"
+      "bytes": 25715575,
+      "updated": "2026-10-04",
+      "sha256": "06557e782d4ec07737aeb40c3297e05531bd9d8b00374327947a95472a394d83"
     },
     {
       "title": "Ростовская область",
       "file": "TAIGA-ROSTOV.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ROSTOV.map",
-      "bytes": 136655652,
-      "updated": "2026-08-19"
+      "bytes": 138543983,
+      "updated": "2026-10-04",
+      "sha256": "4b99a9a893f537233eafcbad1d8ad0b2b870c2f20db896c2acf08f96e53e1d31"
     },
     {
       "title": "Рязанская область",
       "file": "TAIGA-RYAZAN.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-RYAZAN.map",
-      "bytes": 59602916,
-      "updated": "2026-08-18"
+      "bytes": 60002658,
+      "updated": "2026-10-04",
+      "sha256": "e3a572eadddb51e31e29c3ade92259a97b1535c4e6274d083cbaf838a9d2c487"
     },
     {
       "title": "Самарская область",
       "file": "TAIGA-SAMARA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-SAMARA.map",
-      "bytes": 87599464,
-      "updated": "2026-08-19"
+      "bytes": 87933521,
+      "updated": "2026-10-04",
+      "sha256": "c7f305bf517b67ac9994436215f747d0f2fd92c12ff4bb36220d1154aee179c4"
     },
     {
       "title": "Саратовская область",
       "file": "TAIGA-SARATOV.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-SARATOV.map",
-      "bytes": 58258656,
-      "updated": "2026-08-19"
+      "bytes": 58387390,
+      "updated": "2026-10-04",
+      "sha256": "1749d48bc26841fcc9546433de22e726076c2ac93f5ac337d10daa17d06455a3"
     },
     {
       "title": "Сахалинская область",
       "file": "TAIGA-SAKHALIN.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-SAKHALIN.map",
-      "bytes": 45096754,
-      "updated": "2026-08-20"
+      "bytes": 45383276,
+      "updated": "2026-10-04",
+      "sha256": "c7292c52bd328f9f5e305f0c8c1185365adc46a738c47c69e88e4d8e95c3320d"
     },
     {
       "title": "Свердловская область",
       "file": "TAIGA-SVERDLOVSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-SVERDLOVSK.map",
-      "bytes": 143103574,
-      "updated": "2026-08-20"
+      "bytes": 143904916,
+      "updated": "2026-10-04",
+      "sha256": "544324ac12426dba5acb7cff98acd713fb65c08ea6e89788fc78a4a72a06a8ec"
     },
     {
       "title": "Северная Осетия — Алания",
       "file": "TAIGA-OSSETIA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-OSSETIA.map",
-      "bytes": 24219249,
-      "updated": "2026-08-19"
+      "bytes": 24281185,
+      "updated": "2026-10-04",
+      "sha256": "e0ad6a7e74c0c30ca5cbed3bafb6b2af8384562b9862dbd3a60e9c02576585a9"
     },
     {
       "title": "Смоленская область",
       "file": "TAIGA-SMOLENSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-SMOLENSK.map",
-      "bytes": 63110605,
-      "updated": "2026-08-18"
+      "bytes": 63523444,
+      "updated": "2026-10-04",
+      "sha256": "2361309cecde9163f3634b5d166f7c9bfbe8562ceaa3e90b769ca9345931c015"
     },
     {
       "title": "Ставропольский край",
       "file": "TAIGA-STAVROPOL.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-STAVROPOL.map",
-      "bytes": 57236771,
-      "updated": "2026-08-19"
+      "bytes": 57375801,
+      "updated": "2026-10-04",
+      "sha256": "66356b67b8e0424ba9ad2f17762202cbcbf42149bd3b9269b9fd3c4e9fbf9270"
     },
     {
       "title": "Тамбовская область",
       "file": "TAIGA-TAMBOV.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-TAMBOV.map",
-      "bytes": 47233907,
-      "updated": "2026-08-18"
+      "bytes": 47280355,
+      "updated": "2026-10-04",
+      "sha256": "4196f172aa7b284f7d40e8507f8e904734bb53e174b4a33fe9523f90592ea9de"
     },
     {
       "title": "Татарстан",
       "file": "TAIGA-TATARSTAN.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-TATARSTAN.map",
-      "bytes": 169393494,
-      "updated": "2026-08-19"
+      "bytes": 171054371,
+      "updated": "2026-10-04",
+      "sha256": "2f910ee1c784d0a96e219a9c7e6de9cc0b44373c233ade176fcbfab161448eba"
     },
     {
       "title": "Тверская область",
       "file": "TAIGA-TVER.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-TVER.map",
-      "bytes": 211347544,
-      "updated": "2026-08-18"
+      "bytes": 212163090,
+      "updated": "2026-10-04",
+      "sha256": "af73a95bfc446fe95fd9d332f29dc5170509481a18cc1e96ed02832672a613db"
     },
     {
       "title": "Томская область",
       "file": "TAIGA-TOMSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-TOMSK.map",
-      "bytes": 62996235,
-      "updated": "2026-08-20"
+      "bytes": 63029055,
+      "updated": "2026-10-04",
+      "sha256": "7198ac0a3c7205252677b280ce353dfe6b1730daee9591ffc791a534ad07043e"
     },
     {
       "title": "Тульская область",
       "file": "TAIGA-TULA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-TULA.map",
-      "bytes": 57474813,
-      "updated": "2026-08-19"
+      "bytes": 57742931,
+      "updated": "2026-10-04",
+      "sha256": "3d3501469635e3431690b9c7d045a27c6c542a41ecb29c3d4d082d7be914c309"
     },
     {
       "title": "Тюменская область",
       "file": "TAIGA-TYUMEN.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-TYUMEN.map",
-      "bytes": 69057498,
-      "updated": "2026-08-20"
+      "bytes": 69457912,
+      "updated": "2026-10-04",
+      "sha256": "fb873230431fef58a4227e9cb9481f24f224ad253e50e42ff801f11043b07472"
     },
     {
       "title": "Удмуртия",
       "file": "TAIGA-UDMURTIA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-UDMURTIA.map",
-      "bytes": 72092611,
-      "updated": "2026-08-19"
+      "bytes": 72408471,
+      "updated": "2026-10-04",
+      "sha256": "52d2dcaafefb5dd348c18dc8c62f9de8ac68c3a7d34c5ca0f62fa90dd41722d5"
     },
     {
       "title": "Ульяновская область",
       "file": "TAIGA-ULYANOVSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-ULYANOVSK.map",
-      "bytes": 78960233,
-      "updated": "2026-08-19"
+      "bytes": 79182970,
+      "updated": "2026-10-04",
+      "sha256": "892f48bbb9cfa100f6999aeac29235d75d62b370a4dce7be194d21c9e434a750"
     },
     {
       "title": "Хабаровский край",
       "file": "TAIGA-KHABAROVSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KHABAROVSK.map",
-      "bytes": 147985480,
-      "updated": "2026-08-20"
+      "bytes": 148450944,
+      "updated": "2026-10-04",
+      "sha256": "9b06620230002c59312158dff1ac48c76639ec9ae667b1446ae53decc1774b02"
     },
     {
       "title": "Ханты-Мансийский автономный округ — Югра",
       "file": "TAIGA-KHANTY_MANSI.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KHANTY_MANSI.map",
-      "bytes": 157791798,
-      "updated": "2026-08-20"
+      "bytes": 158643411,
+      "updated": "2026-10-04",
+      "sha256": "fad8a34b719070716e0d0e680bbebe9cea87112e97bafde01a707b08414bc0df"
     },
     {
       "title": "Херсонская область",
       "file": "TAIGA-KHERSON.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-KHERSON.map",
-      "bytes": 44972065,
-      "updated": "2026-08-20"
+      "bytes": 45165485,
+      "updated": "2026-10-04",
+      "sha256": "80d577e99b59374a1c3a8f7ca763e9a8f79f1a649d22f677a9d07edacc59076e"
     },
     {
       "title": "Челябинская область",
       "file": "TAIGA-CHELYABINSK.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-CHELYABINSK.map",
-      "bytes": 91356723,
-      "updated": "2026-08-20"
+      "bytes": 91916832,
+      "updated": "2026-10-04",
+      "sha256": "d21de2e2a9f939f0a15e1a9614bd56cda8913a0163936a574fb35409d9fdb276"
     },
     {
       "title": "Чечня",
       "file": "TAIGA-CHECHNYA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-CHECHNYA.map",
-      "bytes": 20844059,
-      "updated": "2026-08-19"
+      "bytes": 20995472,
+      "updated": "2026-10-04",
+      "sha256": "4435ea628fba804d02396884a42c063e841fdd15e939a689eeeb7b603302397f"
     },
     {
       "title": "Чувашия",
       "file": "TAIGA-CHUVASHIA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-CHUVASHIA.map",
-      "bytes": 38144337,
-      "updated": "2026-08-19"
+      "bytes": 38218120,
+      "updated": "2026-10-04",
+      "sha256": "c4aff90bd2e79c97c4a2467b1a879ab00f49e221785e471ab1e0a289b48f2abb"
     },
     {
       "title": "Чукотский автономный округ (восток)",
       "file": "TAIGA-CHUKOTKA_EAST.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-CHUKOTKA_EAST.map",
-      "bytes": 24067666,
-      "updated": "2026-08-20"
+      "bytes": 25398228,
+      "updated": "2026-10-04",
+      "sha256": "153bd3aaab1be80ffe421eb360c0246b424df182f116587b267b47151f20b02f"
     },
     {
       "title": "Чукотский автономный округ (запад)",
       "file": "TAIGA-CHUKOTKA.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-CHUKOTKA.map",
-      "bytes": 67937463,
-      "updated": "2026-08-20"
+      "bytes": 68009099,
+      "updated": "2026-10-04",
+      "sha256": "63eef654d5424e6b9e8934888bf4f75f983eed9ec8fef3644e8f2bf923475bc3"
     },
     {
       "title": "Ямало-Ненецкий автономный округ",
       "file": "TAIGA-YAMALO_NENETS.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-YAMALO_NENETS.map",
-      "bytes": 83224322,
-      "updated": "2026-08-20"
+      "bytes": 83502071,
+      "updated": "2026-10-04",
+      "sha256": "b93d196406c0d427c167114fddaaaf30b18836d710bacb740af71cdf37ed0528"
     },
     {
       "title": "Ярославская область",
       "file": "TAIGA-YAROSLAVL.map",
       "url": "https://github.com/dmel83/taiga-maps/releases/download/maps-2026-08/TAIGA-YAROSLAVL.map",
-      "bytes": 68694534,
-      "updated": "2026-08-18"
+      "bytes": 69038295,
+      "updated": "2026-10-04",
+      "sha256": "76344fa78750f7636cf4923df9d5306d3eb89ff7137d107bed97b3535e5e91db"
     }
   ]
 }
