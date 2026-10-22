@@ -1,0 +1,14 @@
+# Библиотеки для tools-sputnik-sentinel.py (спутник из снимков Sentinel-2).
+# Версии закреплены точно: сборка через полгода должна дать тот же
+# снимок того же цвета. Ставить только готовые колёса:
+#   pip install --only-binary=:all: -r requirements-sputnik.txt
+# rasterio 1.5.1 везёт свой GDAL 3.12.4 с поддержкой /vsis3/ — ставить
+# GDAL из apt не нужно. Проверено 22.10.2026 на Python 3.12 (Ubuntu 24.04).
+rasterio==1.5.1
+numpy==2.5.3
+pillow==12.3.0
+affine==3.0.1
+attrs==26.1.0
+certifi==2026.10.19
+click==8.5.0
+pyparsing==3.3.3

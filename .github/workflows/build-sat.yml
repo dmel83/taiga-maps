@@ -1,19 +1,36 @@
 # Сборка спутникового снимка области для приложения ТАЙГА.
 #
-# ДОБАВЛЕНО 04.10.2026 — проба спутника на Ленинградской области.
-# Что за снимок, чья лицензия и почему именно так — в шапке
-# tools-sputnik.py.
+# ДОБАВЛЕНО 04.10.2026 — проба спутника на Ленинградской области (EOX).
+# ИЗМЕНЕНО 22.10.2026 — основной источник теперь открытые снимки
+# Sentinel-2 L2A в облаке Amazon (Element84): мы сами собираем из них
+# безоблачное лето (медиана ясных снимков). НИКАКИХ КЛЮЧЕЙ И УЧЁТНЫХ
+# ЗАПИСЕЙ НЕ НУЖНО. Разбор источника, масштаба и цвета — в шапке
+# tools-sputnik-sentinel.py.
 #
-# КАК ЗАПУСТИТЬ. Как и карты — файлом заказа: вписать в
-# zakaz-sputnik.txt ключ области (LENOBL) и сохранить. Строки
-# с решёткой — комментарии. Одна область за раз: снимок качается
-# с чужого бесплатного сервера, и вежливо это делать по одной.
+# РАЗБИРАЕМЫЙ ДЕФЕКТ: первая версия этого файла требовала ключи
+# Copernicus Data Space (CDSE), а их из России не получить — кабинет
+# CDSE не открывается даже через VPN. CDSE оставлен как необязательный
+# путь (слово CDSE в заказе), EOX 2017 — как старый запасной.
 #
-# НЕ ЗАПУСКАТЬ ДО ОТВЕТА EOX на письмо о выгрузке (cloudless@eox.at).
+# КАК ЗАПУСТИТЬ. Файлом заказа: вписать в zakaz-sputnik.txt одну строку
+# и сохранить в main. Строки с решёткой — комментарии.
+#   LENOBL              — Ленобласть, последнее законченное лето;
+#   LENOBL 2025         — Ленобласть, лето 2025 года;
+#   LENOBL CDSE         — готовая мозаика CDSE (нужны ключи, см. ниже);
+#   LENOBL 2026-Q3      — мозаика CDSE именно этого квартала (ключи);
+#   LENOBL EOX          — старый снимок EOX 2017 (НЕ ЗАПУСКАТЬ до
+#                         ответа EOX на письмо cloudless@eox.at).
+# Одна область за раз: снимок области — это часы работы, а у GitHub
+# предел шесть часов на задачу. Сборщик сам следит за временем и, если
+# не успевает, берёт меньше снимков на квадрат (--budget-minutes).
+#
+# Ключи CDSE (только для слова CDSE): секреты репозитория
+# CDSE_S3_ACCESS_KEY и CDSE_S3_SECRET_KEY. Обычной сборке они не нужны.
 #
 # Готовый файл кладётся на полку области — в выпуск TAIGA-<КЛЮЧ>,
 # рядом с пакетами слоёв: там его ищет приложение (region/SatPack).
-# Рядом — файл с отпечатком SHA-256.
+# Имя файла прежнее — TAIGA-<КЛЮЧ>-satellite.mbtiles, приложение менять
+# не нужно. Рядом — файл с отпечатком SHA-256.
 
 name: Собрать спутник ТАЙГА
 
@@ -34,8 +51,8 @@ concurrency:
 jobs:
   sputnik:
     name: Спутник
-    runs-on: ubuntu-latest
-    # Около 40 000 плиток по три в секунду — почти четыре часа.
+    runs-on: ubuntu-24.04
+    # Шесть часов — потолок GitHub; оставляем запас на выкладку.
     timeout-minutes: 340
     steps:
       - uses: actions/checkout@v4
@@ -43,20 +60,103 @@ jobs:
       - name: Разобрать заказ
         id: order
         run: |
-          KEY="$(grep -v '^[[:space:]]*#' zakaz-sputnik.txt | tr -d '\r[:space:]' | head -c 40)"
+          LINE="$(grep -v '^[[:space:]]*#' zakaz-sputnik.txt | tr -d '\r' | grep -m1 '[^[:space:]]' || true)"
+          KEY="$(echo "$LINE" | awk '{print $1}')"
+          SECOND="$(echo "$LINE" | awk '{print $2}' | tr 'a-z' 'A-Z')"
+          THIRD="$(echo "$LINE" | awk '{print $3}' | tr 'a-z' 'A-Z')"
           if [ -z "$KEY" ]; then
-            echo "Заказ пуст — собирать нечего."
+            echo "::error::Заказ пуст — собирать нечего. Впишите в zakaz-sputnik.txt ключ области, например LENOBL."
             exit 1
           fi
           case "$KEY" in
-            *[!A-Z0-9_-]*) echo "Странный ключ области: $KEY"; exit 1 ;;
+            *[!A-Z0-9_-]*) echo "::error::Странный ключ области: $KEY"; exit 1 ;;
+          esac
+          SOURCE=aws
+          YEAR=""
+          QUARTER=""
+          case "$SECOND" in
+            "") ;;
+            EOX) SOURCE=eox ;;
+            CDSE) SOURCE=cdse
+                  case "$THIRD" in
+                    "") ;;
+                    20[0-9][0-9]-Q[1-4]) QUARTER="$THIRD" ;;
+                    *) echo "::error::После CDSE можно только квартал вида 2026-Q3, а не «$THIRD»."; exit 1 ;;
+                  esac ;;
+            20[0-9][0-9]-Q[1-4]) SOURCE=cdse; QUARTER="$SECOND" ;;
+            20[0-9][0-9]) YEAR="$SECOND" ;;
+            *) echo "::error::Второе слово заказа «$SECOND» непонятно. Можно: год (2025), CDSE, квартал вида 2026-Q3 или EOX."; exit 1 ;;
           esac
           echo "key=$KEY" >> "$GITHUB_OUTPUT"
+          echo "source=$SOURCE" >> "$GITHUB_OUTPUT"
+          echo "year=$YEAR" >> "$GITHUB_OUTPUT"
+          echo "quarter=$QUARTER" >> "$GITHUB_OUTPUT"
+          echo "Заказ: область $KEY, источник $SOURCE${YEAR:+, лето $YEAR}${QUARTER:+, квартал $QUARTER}"
 
-      - name: Посчитать плитки
+      - name: Проверить ключи Copernicus (только для CDSE)
+        if: steps.order.outputs.source == 'cdse'
+        env:
+          A: ${{ secrets.CDSE_S3_ACCESS_KEY }}
+          S: ${{ secrets.CDSE_S3_SECRET_KEY }}
+        run: |
+          if [ -n "$A" ] && [ -n "$S" ]; then
+            echo "Ключи на месте."
+            exit 0
+          fi
+          echo "::error::Заказан путь CDSE, а ключей Copernicus нет."
+          echo "Путь CDSE работает только с ключами S3 Copernicus Data Space:"
+          echo "секреты CDSE_S3_ACCESS_KEY и CDSE_S3_SECRET_KEY (Settings → Secrets"
+          echo "and variables → Actions). Их выдаёт кабинет"
+          echo "https://eodata-s3keysmanager.dataspace.copernicus.eu/ ."
+          echo "Ключей нет — уберите слово CDSE (и квартал) из zakaz-sputnik.txt:"
+          echo "обычная сборка идёт из открытых снимков и ключей не требует."
+          exit 1
+
+      - uses: actions/setup-python@v5
+        if: steps.order.outputs.source != 'eox'
+        with:
+          python-version: "3.12"
+
+      - name: Поставить библиотеки
+        if: steps.order.outputs.source != 'eox'
+        run: |
+          python -m pip install --only-binary=:all: -r requirements-sputnik.txt
+          python -c "import rasterio; print('rasterio', rasterio.__version__, 'GDAL', rasterio.__gdal_version__)"
+
+      - name: Проверки сборщика
+        if: steps.order.outputs.source != 'eox'
+        run: python -m unittest discover -s tests -v
+
+      - name: План — плитки, снимки, объём
+        if: steps.order.outputs.source != 'eox'
+        run: |
+          python tools-sputnik-sentinel.py --key "${{ steps.order.outputs.key }}" \
+            --source "${{ steps.order.outputs.source }}" \
+            --year "${{ steps.order.outputs.year || 0 }}" \
+            --quarter "${{ steps.order.outputs.quarter }}" --count-only
+
+      - name: Собрать снимок (открытые снимки Sentinel-2)
+        if: steps.order.outputs.source == 'aws'
+        run: |
+          python tools-sputnik-sentinel.py --key "${{ steps.order.outputs.key }}" \
+            --year "${{ steps.order.outputs.year || 0 }}" --budget-minutes 290
+
+      - name: Собрать снимок (мозаика CDSE)
+        if: steps.order.outputs.source == 'cdse'
+        env:
+          CDSE_S3_ACCESS_KEY: ${{ secrets.CDSE_S3_ACCESS_KEY }}
+          CDSE_S3_SECRET_KEY: ${{ secrets.CDSE_S3_SECRET_KEY }}
+        run: |
+          python tools-sputnik-sentinel.py --key "${{ steps.order.outputs.key }}" \
+            --source cdse --quarter "${{ steps.order.outputs.quarter }}"
+
+      # Запасной путь — старый сборщик EOX 2017, без изменений.
+      - name: Посчитать плитки (EOX)
+        if: steps.order.outputs.source == 'eox'
         run: python3 tools-sputnik.py --key "${{ steps.order.outputs.key }}" --count-only
 
-      - name: Скачать снимок
+      - name: Скачать снимок (EOX)
+        if: steps.order.outputs.source == 'eox'
         run: python3 tools-sputnik.py --key "${{ steps.order.outputs.key }}" --rate 3
 
       - name: Проверить файл
@@ -65,7 +165,18 @@ jobs:
           ls -l "$F"
           # Меньше мегабайта на область — значит скачалось не то.
           [ "$(stat -c %s "$F")" -gt 1048576 ]
-          python3 -c "import sqlite3,sys; d=sqlite3.connect(sys.argv[1]); print('плиток:', d.execute('select count(*) from tiles').fetchone()[0]); print(d.execute(\"select value from metadata where name='attribution'\").fetchone()[0])" "$F"
+          python3 - "$F" <<'EOF'
+          import sqlite3, sys
+          d = sqlite3.connect(sys.argv[1])
+          meta = dict(d.execute("select name, value from metadata"))
+          for k in ("name", "format", "bounds", "minzoom", "maxzoom", "attribution", "description"):
+              print(k, "=", meta.get(k))
+          assert meta.get("format") in ("jpg", "png"), "формат плиток не тот"
+          print("плиток по уровням:", d.execute(
+              "select zoom_level, count(*) from tiles group by zoom_level").fetchall())
+          head = d.execute("select substr(tile_data, 1, 3) from tiles limit 1").fetchone()[0]
+          assert bytes(head) == b"\xff\xd8\xff", "плитка не JPEG"
+          EOF
           sha256sum "$F" | cut -d' ' -f1 > "$F.sha256"
 
       - name: Положить на полку области
