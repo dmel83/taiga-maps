@@ -1,4 +1,4 @@
-# Библиотеки для tools-sputnik-cdse.py (спутник из мозаик Copernicus).
+# Библиотеки для tools-sputnik-sentinel.py (спутник из снимков Sentinel-2).
 # Версии закреплены точно: сборка через полгода должна дать тот же
 # снимок того же цвета. Ставить только готовые колёса:
 #   pip install --only-binary=:all: -r requirements-sputnik.txt

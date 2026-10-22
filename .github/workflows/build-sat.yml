@@ -1,25 +1,31 @@
 # Сборка спутникового снимка области для приложения ТАЙГА.
 #
 # ДОБАВЛЕНО 04.10.2026 — проба спутника на Ленинградской области (EOX).
-# ИЗМЕНЕНО 22.10.2026 — основной источник теперь Copernicus: квартальные
-# безоблачные мозаики Sentinel-2 (tools-sputnik-cdse.py, там же разбор
-# источника, масштаба и цвета). EOX 2017 (tools-sputnik.py) остался
-# запасным — его можно заказать словом EOX.
+# ИЗМЕНЕНО 22.10.2026 — основной источник теперь открытые снимки
+# Sentinel-2 L2A в облаке Amazon (Element84): мы сами собираем из них
+# безоблачное лето (медиана ясных снимков). НИКАКИХ КЛЮЧЕЙ И УЧЁТНЫХ
+# ЗАПИСЕЙ НЕ НУЖНО. Разбор источника, масштаба и цвета — в шапке
+# tools-sputnik-sentinel.py.
+#
+# РАЗБИРАЕМЫЙ ДЕФЕКТ: первая версия этого файла требовала ключи
+# Copernicus Data Space (CDSE), а их из России не получить — кабинет
+# CDSE не открывается даже через VPN. CDSE оставлен как необязательный
+# путь (слово CDSE в заказе), EOX 2017 — как старый запасной.
 #
 # КАК ЗАПУСТИТЬ. Файлом заказа: вписать в zakaz-sputnik.txt одну строку
 # и сохранить в main. Строки с решёткой — комментарии.
-#   LENOBL            — Ленобласть, самое свежее лето (Q3) Copernicus;
-#   LENOBL 2025-Q3    — Ленобласть, именно этот квартал;
-#   LENOBL EOX        — Ленобласть по-старому, EOX 2017 (НЕ ЗАПУСКАТЬ
-#                       до ответа EOX на письмо cloudless@eox.at).
-# Одна область за раз: снимок области — это несколько часов, а у GitHub
-# предел шесть часов на задачу.
+#   LENOBL              — Ленобласть, последнее законченное лето;
+#   LENOBL 2025         — Ленобласть, лето 2025 года;
+#   LENOBL CDSE         — готовая мозаика CDSE (нужны ключи, см. ниже);
+#   LENOBL 2026-Q3      — мозаика CDSE именно этого квартала (ключи);
+#   LENOBL EOX          — старый снимок EOX 2017 (НЕ ЗАПУСКАТЬ до
+#                         ответа EOX на письмо cloudless@eox.at).
+# Одна область за раз: снимок области — это часы работы, а у GitHub
+# предел шесть часов на задачу. Сборщик сам следит за временем и, если
+# не успевает, берёт меньше снимков на квадрат (--budget-minutes).
 #
-# КЛЮЧИ. Copernicus отдаёт снимки только с ключами S3. Их нужно один раз
-# положить в секреты репозитория: Settings → Secrets and variables →
-# Actions → New repository secret, имена CDSE_S3_ACCESS_KEY и
-# CDSE_S3_SECRET_KEY. Без них задача останавливается на первом же шаге
-# и пишет, что сделать. Сами ключи в журнал не попадают.
+# Ключи CDSE (только для слова CDSE): секреты репозитория
+# CDSE_S3_ACCESS_KEY и CDSE_S3_SECRET_KEY. Обычной сборке они не нужны.
 #
 # Готовый файл кладётся на полку области — в выпуск TAIGA-<КЛЮЧ>,
 # рядом с пакетами слоёв: там его ищет приложение (region/SatPack).
@@ -57,6 +63,7 @@ jobs:
           LINE="$(grep -v '^[[:space:]]*#' zakaz-sputnik.txt | tr -d '\r' | grep -m1 '[^[:space:]]' || true)"
           KEY="$(echo "$LINE" | awk '{print $1}')"
           SECOND="$(echo "$LINE" | awk '{print $2}' | tr 'a-z' 'A-Z')"
+          THIRD="$(echo "$LINE" | awk '{print $3}' | tr 'a-z' 'A-Z')"
           if [ -z "$KEY" ]; then
             echo "::error::Заказ пуст — собирать нечего. Впишите в zakaz-sputnik.txt ключ области, например LENOBL."
             exit 1
@@ -64,20 +71,29 @@ jobs:
           case "$KEY" in
             *[!A-Z0-9_-]*) echo "::error::Странный ключ области: $KEY"; exit 1 ;;
           esac
-          SOURCE=cdse
+          SOURCE=aws
+          YEAR=""
           QUARTER=""
           case "$SECOND" in
             "") ;;
             EOX) SOURCE=eox ;;
-            20[0-9][0-9]-Q[1-4]) QUARTER="$SECOND" ;;
-            *) echo "::error::Второе слово заказа «$SECOND» непонятно. Можно: квартал вида 2026-Q3 или EOX."; exit 1 ;;
+            CDSE) SOURCE=cdse
+                  case "$THIRD" in
+                    "") ;;
+                    20[0-9][0-9]-Q[1-4]) QUARTER="$THIRD" ;;
+                    *) echo "::error::После CDSE можно только квартал вида 2026-Q3, а не «$THIRD»."; exit 1 ;;
+                  esac ;;
+            20[0-9][0-9]-Q[1-4]) SOURCE=cdse; QUARTER="$SECOND" ;;
+            20[0-9][0-9]) YEAR="$SECOND" ;;
+            *) echo "::error::Второе слово заказа «$SECOND» непонятно. Можно: год (2025), CDSE, квартал вида 2026-Q3 или EOX."; exit 1 ;;
           esac
           echo "key=$KEY" >> "$GITHUB_OUTPUT"
           echo "source=$SOURCE" >> "$GITHUB_OUTPUT"
+          echo "year=$YEAR" >> "$GITHUB_OUTPUT"
           echo "quarter=$QUARTER" >> "$GITHUB_OUTPUT"
-          echo "Заказ: область $KEY, источник $SOURCE${QUARTER:+, квартал $QUARTER}"
+          echo "Заказ: область $KEY, источник $SOURCE${YEAR:+, лето $YEAR}${QUARTER:+, квартал $QUARTER}"
 
-      - name: Проверить ключи Copernicus
+      - name: Проверить ключи Copernicus (только для CDSE)
         if: steps.order.outputs.source == 'cdse'
         env:
           A: ${{ secrets.CDSE_S3_ACCESS_KEY }}
@@ -87,50 +103,52 @@ jobs:
             echo "Ключи на месте."
             exit 0
           fi
-          echo "::error::Нет ключей Copernicus — снимок не скачать."
-          echo "НЕТ КЛЮЧЕЙ COPERNICUS. Что сделать (один раз):"
-          echo " 1) Зарегистрироваться на https://dataspace.copernicus.eu (бесплатно)."
-          echo " 2) Войти на https://eodata-s3keysmanager.dataspace.copernicus.eu/"
-          echo "    и нажать «Add Credentials», указать срок действия, «Confirm»."
-          echo "    Secret Key показывается ОДИН раз — сразу скопировать."
-          echo " 3) Здесь, в GitHub: Settings → Secrets and variables → Actions →"
-          echo "    New repository secret. Два секрета:"
-          echo "      CDSE_S3_ACCESS_KEY — Access Key"
-          echo "      CDSE_S3_SECRET_KEY — Secret Key"
-          echo " 4) Заново сохранить zakaz-sputnik.txt (любая правка) — сборка пойдёт."
-          [ -n "$A" ] || echo "Не хватает: CDSE_S3_ACCESS_KEY"
-          [ -n "$S" ] || echo "Не хватает: CDSE_S3_SECRET_KEY"
+          echo "::error::Заказан путь CDSE, а ключей Copernicus нет."
+          echo "Путь CDSE работает только с ключами S3 Copernicus Data Space:"
+          echo "секреты CDSE_S3_ACCESS_KEY и CDSE_S3_SECRET_KEY (Settings → Secrets"
+          echo "and variables → Actions). Их выдаёт кабинет"
+          echo "https://eodata-s3keysmanager.dataspace.copernicus.eu/ ."
+          echo "Ключей нет — уберите слово CDSE (и квартал) из zakaz-sputnik.txt:"
+          echo "обычная сборка идёт из открытых снимков и ключей не требует."
           exit 1
 
       - uses: actions/setup-python@v5
-        if: steps.order.outputs.source == 'cdse'
+        if: steps.order.outputs.source != 'eox'
         with:
           python-version: "3.12"
 
       - name: Поставить библиотеки
-        if: steps.order.outputs.source == 'cdse'
+        if: steps.order.outputs.source != 'eox'
         run: |
           python -m pip install --only-binary=:all: -r requirements-sputnik.txt
           python -c "import rasterio; print('rasterio', rasterio.__version__, 'GDAL', rasterio.__gdal_version__)"
 
       - name: Проверки сборщика
-        if: steps.order.outputs.source == 'cdse'
+        if: steps.order.outputs.source != 'eox'
         run: python -m unittest discover -s tests -v
 
-      - name: Посчитать плитки и снимки
-        if: steps.order.outputs.source == 'cdse'
+      - name: План — плитки, снимки, объём
+        if: steps.order.outputs.source != 'eox'
         run: |
-          python tools-sputnik-cdse.py --key "${{ steps.order.outputs.key }}" \
+          python tools-sputnik-sentinel.py --key "${{ steps.order.outputs.key }}" \
+            --source "${{ steps.order.outputs.source }}" \
+            --year "${{ steps.order.outputs.year || 0 }}" \
             --quarter "${{ steps.order.outputs.quarter }}" --count-only
 
-      - name: Собрать снимок Copernicus
+      - name: Собрать снимок (открытые снимки Sentinel-2)
+        if: steps.order.outputs.source == 'aws'
+        run: |
+          python tools-sputnik-sentinel.py --key "${{ steps.order.outputs.key }}" \
+            --year "${{ steps.order.outputs.year || 0 }}" --budget-minutes 290
+
+      - name: Собрать снимок (мозаика CDSE)
         if: steps.order.outputs.source == 'cdse'
         env:
           CDSE_S3_ACCESS_KEY: ${{ secrets.CDSE_S3_ACCESS_KEY }}
           CDSE_S3_SECRET_KEY: ${{ secrets.CDSE_S3_SECRET_KEY }}
         run: |
-          python tools-sputnik-cdse.py --key "${{ steps.order.outputs.key }}" \
-            --quarter "${{ steps.order.outputs.quarter }}"
+          python tools-sputnik-sentinel.py --key "${{ steps.order.outputs.key }}" \
+            --source cdse --quarter "${{ steps.order.outputs.quarter }}"
 
       # Запасной путь — старый сборщик EOX 2017, без изменений.
       - name: Посчитать плитки (EOX)
